@@ -1,0 +1,35 @@
+{
+    "name": "MyCommandCenter",
+    "main": "src/templates/main.html",
+    "window": {
+        "toolbar": true
+    },
+    "scripts": {
+        "start": "nw"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@fortawesome/fontawesome-free": "^5.6.3",
+        "bootstrap": "^4.2.1",
+        "jquery": "^3.3.1",
+        "jsrender": "^1.0.1",
+        "nw": "^0.35.5",
+        "popper.js": "^1.14.6",
+        "rxjs": "^6.3.3",
+        "rxjs-compat": "^6.3.3"
+    },
+    "routes": {
+        "/": {
+            "component": "Home",
+            "template": "Home"
+        },
+        "": {
+            "component": "NotFound",
+            "template": "NotFound"
+        }
+    },
+    "devRoutesWatch": [
+        "/src/",
+        "/package.json"
+    ]
+}

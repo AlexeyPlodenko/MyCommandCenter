@@ -1,0 +1,85 @@
+* {
+    box-sizing: border-box;
+    outline: none;
+    user-select: none;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+}
+body, table, input, textarea {
+    font: 16px Arial, sans-serif;
+}
+
+.hidden {
+    display: none;
+}
+
+.search {
+    /*background: pink;*/
+    height: 40px;
+    padding: 10px;
+}
+.search_input {
+    width: 100%;
+}
+
+.page {
+    justify-content: space-between;
+    height: calc(100% - 40px);
+    /*background: red;*/
+}
+
+.actions {
+    /*background: orange;*/
+    width: calc(100% - 250px);
+    height: 100%;
+    display: inline-block;
+    padding: 10px;
+}
+.action {
+    cursor: pointer;
+}
+.action_name {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    max-height: 47px;
+}
+
+.menu {
+    /*background: blue;*/
+    width: 250px;
+    height: 100%;
+    display: inline-block;
+    float: right;
+    padding: 10px 10px 10px 25px;
+    position: relative;
+}
+.menu_btn {
+
+}
+.menu_collapse {
+    font-size: 16px;
+    display: block;
+    color: black;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    margin-top: -10px;
+    cursor: pointer;
+    color: #ccc;
+}
+.menu_lvl_1, .menu_lvl_2 {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.menu_lvl_2 {
+    margin-top: 5px;
+    margin-left: 20px;
+}
+.menu_item {
+    margin-bottom: 10px;
+}
