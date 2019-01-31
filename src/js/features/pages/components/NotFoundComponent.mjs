@@ -17,4 +17,6 @@ export class NotFoundComponent extends Component {
     constructor(app) {
         super(app);
     }
+
+    onInit() {}
 }

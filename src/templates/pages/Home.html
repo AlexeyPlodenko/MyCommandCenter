@@ -1,6 +1,7 @@
 <div class="search">
     <input type="text" id="search_input" class="search_input" autocomplete="off" placeholder="Start typing to find the action...">
 </div>
+
 <div class="page">
     <div class="actions">
         <div class="card">
@@ -15,26 +16,85 @@
     </div>
     <div class="menu" id="menu">
         <i class="menu_collapse fas fa-grip-lines-vertical"></i>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb small">
-                <!--                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Library</li>-->
-                <li class="breadcrumb-item" aria-current="page">Home</li>
-            </ol>
-        </nav>
-        <ul class="menu_lvl_1 nav flex-column">
-            <li class="menu_item nav-item">
-                <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="">Application/BAT file</a>
-                    <a class="dropdown-item" href="">CLI command</a>
-                    <a class="dropdown-item" href="">Web link</a>
-                    <!--                        <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Separated link</a>-->
+
+        <div id="menu_home">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb small">
+                    <li class="breadcrumb-item" aria-current="page">Menu</li>
+                </ol>
+            </nav>
+            <ul class="menu_lvl_1 nav flex-column">
+                <li class="menu_item nav-item">
+                    <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add</a>
+                    <div class="dropdown-menu" id="menu_add">
+                        <a class="dropdown-item" href="" data-show-menu-item="menu_add_app" data-toggle="tooltip" data-placement="left" title="Any type of file. A proper application will run to handle it, if file is not of an executable type.">File</a>
+                        <a class="dropdown-item" href="" data-show-menu-item="menu_add_cli_comm">CLI command</a>
+                        <a class="dropdown-item" href="" data-show-menu-item="menu_add_web_link">Web link</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="" data-show-menu-item="menu_add_category">Category</a>
+                    </div>
+                </li>
+                <li class="menu_item nav-item">
+                    <a href="" class="nav-link">...</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="menu_add_app">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb small">
+                    <li class="breadcrumb-item"><a href="" data-show-menu-item="menu_home">Menu</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Add file</li>
+                </ol>
+            </nav>
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Choose file</label>
+                    <input type="file" class="form-control-file" id="menu_add_app_file" required="required">
+                    <small id="emailHelp" class="form-text text-muted">Choose any type of file. A proper application will run to handle it, if file is not of an executable type.</small>
                 </div>
-            </li>
-            <li class="menu_item nav-item">
-                <a href="" class="nav-link">...</a>
-            </li>
+
+                <div class="form-group">
+                    <input class="form-control" name="fields[]" type="text" placeholder="Type something" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-success btn-add" type="button">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="menu_add_cli_comm">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb small">
+                    <li class="breadcrumb-item"><a href="" data-show-menu-item="menu_home">Menu</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Add CLI command</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div id="menu_add_web_link">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb small">
+                    <li class="breadcrumb-item"><a href="" data-show-menu-item="menu_home">Menu</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Add web link</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div id="menu_add_category">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb small">
+                    <li class="breadcrumb-item"><a href="" data-show-menu-item="menu_home">Menu</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Add category</li>
+                </ol>
+            </nav>
+        </div>
+
     </div>
 </div>
+

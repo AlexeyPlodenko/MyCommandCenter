@@ -9,5 +9,6 @@ An application to manage your daily computer routine and run CLI commands from t
 * Templates and HTML sharing.
 * .html <head> section.
 * Translations.
-
+* File icons automatic usage as main image.
+* Use PouchDB as data provider.
 

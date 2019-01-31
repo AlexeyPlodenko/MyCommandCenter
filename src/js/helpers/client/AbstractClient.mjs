@@ -17,6 +17,10 @@ export class AbstractClient extends Abstract {
     constructor() {
         super();
 
+        if (new.target === AbstractClient) {
+            throw 'Cannot construct AbstractClient instances directly.';
+        }
+
         if (typeof this.getPath !== 'function') {
             throw 'Class must implement the method "getPath".';
         }

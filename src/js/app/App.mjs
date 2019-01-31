@@ -1,5 +1,6 @@
 const Fs = require('fs'),
-      Path = require('path');
+      Path = require('path'),
+      NwGui = require('nw.gui');
 
 import { Ui } from '/src/js/app/Ui.mjs';
 import { Router } from '/src/js/app/Router.mjs';
@@ -26,7 +27,7 @@ export class App {
      * Constructor.
      */
     constructor() {
-        const baseDir = process.cwd();
+        this._clearHtmlCache();
 
         this._loadEnv();
 
@@ -41,19 +42,8 @@ export class App {
         this.client = new ClientNwjs();
         this.ui = new Ui(this);
         this.router = new Router(this);
-
-        this.client.path$.subscribe((path) => {
-            console.log('URL path has changed', path);
-            
-            const urlPath = this.client.getPath();
-            const route = this.router.getRouteByPath(urlPath);
-            const comp = ComponentFactory.createComponent(route.component, this);
-
-            comp.state.subscribe((state) => {
-                console.log('Component state has changed', state);
-                
-                this.ui.renderTemplate(route.template, state);
-            });
+        $(() => {
+            this._initUi();
         });
     }
 
@@ -69,6 +59,36 @@ export class App {
      */
     isProdEnv() {
         return !this._envIsDev;
+    }
+
+    /**
+     * Clear HTML cached in Chrome, so the app. would always show the latest version.
+     */
+    _clearHtmlCache() {
+        NwGui.App.clearCache();
+        for (const module in global.require.cache){
+            delete global.require.cache[module];
+        }
+    }
+
+    /**
+     * Init. logic affecting UI or working with DOM.
+     */
+    _initUi() {
+        this.client.path$.subscribe((path) => {
+            console.log('URL path has changed', path);
+
+            const urlPath = this.client.getPath();
+            const route = this.router.getRouteByPath(urlPath);
+            const comp = ComponentFactory.createComponent(route.component, this);
+
+            comp.state.subscribe((state) => {
+                console.log('Component state has changed', state);
+
+                this.ui.renderTemplate(route.template, state);
+                comp.onInit();
+            });
+        });
     }
 
     /**

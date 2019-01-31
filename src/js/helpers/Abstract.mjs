@@ -11,7 +11,7 @@ export class Abstract {
      */
     constructor() {
         if (new.target === Abstract) {
-            throw 'Cannot construct Abstract instances directly';
+            throw 'Cannot construct Abstract instances directly.';
         }
     }
 }

@@ -8,6 +8,7 @@ import { Menu } from '/src/js/features/Menu.mjs';
  * @class
  * @constructor
  * @private
+ * @property {App} _app
  * @property {Menu} _menu
  * @property {BehaviorSubject} state
  */
@@ -18,8 +19,16 @@ export class Component {
      * @param {App} app
      */
     constructor(app) {
-        this._menu = new Menu(app);
+        if (new.target === Component) {
+            throw 'Cannot construct Component instances directly.';
+        }
 
+        if (typeof this.onInit !== 'function') {
+            throw 'Class must implement the method "onInit".';
+        }
+
+        this._app = app;
+        this._menu = new Menu(app);
         this.state = new BehaviorSubject({});
     }
 }
