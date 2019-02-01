@@ -2,12 +2,12 @@ const Fs = require('fs'),
       Path = require('path'),
       NwGui = require('nw.gui');
 
-import { Ui } from '/src/js/app/Ui.mjs';
-import { Router } from '/src/js/app/Router.mjs';
-import { DevTools } from '/src/js/helpers/DevTools.mjs';
-import { PackageJson } from '/src/js/helpers/PackageJson.mjs';
-import { ClientNwjs } from '/src/js/helpers/client/ClientNwjs.mjs';
-import { ComponentFactory } from '/src/js/features/pages/factories/ComponentFactory.mjs';
+import { Ui } from '/src/js/app/Ui.js';
+import { Router } from '/src/js/app/Router.js';
+import { DevTools } from '/src/js/helpers/DevTools.js';
+import { PackageJson } from '/src/js/helpers/PackageJson.js';
+import { ClientNwjs } from '/src/js/helpers/client/ClientNwjs.js';
+import { ComponentFactory } from '/src/js/features/pages/factories/ComponentFactory.js';
 
 /**
  * Application.

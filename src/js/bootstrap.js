@@ -1,3 +1,3 @@
-import { App } from '/src/js/App/app.mjs';
+import { App } from '/src/js/app/app.js';
 
 const app = new App();

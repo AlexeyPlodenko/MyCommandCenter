@@ -1,7 +1,7 @@
 const Fs = require('fs'),
       Path = require('path');
 
-import { Ui } from '/src/js/app/Ui.mjs';
+import { Ui } from '/src/js/app/Ui.js';
 
 /**
  * Responsible for routing URL to components.

@@ -1,7 +1,7 @@
 const Path = require('path');
 
-import { HomeComponent } from '/src/js/features/pages/components/HomeComponent.mjs';
-import { NotFoundComponent } from '/src/js/features/pages/components/NotFoundComponent.mjs';
+import { HomeComponent } from '/src/js/features/pages/components/HomeComponent.js';
+import { NotFoundComponent } from '/src/js/features/pages/components/NotFoundComponent.js';
 
 const components = {
     Home: HomeComponent,
@@ -29,7 +29,7 @@ export class ComponentFactory {
         // @TODO. ATM dynamic class instantiation does not work, ends with an error -
         // SyntaxError: Unexpected token {
 //        const baseDir = process.cwd();
-//        const compPath = Path.join(baseDir, '/src/js/features/pages/components/'+ name +'Component.mjs');
+//        const compPath = Path.join(baseDir, '/src/js/features/pages/components/'+ name +'Component.js');
 //
 //        return require(compPath);
     }

@@ -1,6 +1,6 @@
 const BehaviorSubject = require('rxjs/BehaviorSubject').BehaviorSubject;
 
-import { Abstract } from '/src/js/helpers/Abstract.mjs';
+import { Abstract } from '/src/js/helpers/Abstract.js';
 
 /**
  * AbstractClient.

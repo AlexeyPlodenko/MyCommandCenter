@@ -1,6 +1,6 @@
 const BehaviorSubject = require('rxjs/BehaviorSubject').BehaviorSubject;
 
-import { Menu } from '/src/js/features/Menu.mjs';
+import { Menu } from '/src/js/features/Menu.js';
 
 /**
  * Component.

@@ -1,4 +1,4 @@
-import { AbstractClient } from '/src/js/helpers/client/AbstractClient.mjs';
+import { AbstractClient } from '/src/js/helpers/client/AbstractClient.js';
 
 /**
  * ClientBrowser.

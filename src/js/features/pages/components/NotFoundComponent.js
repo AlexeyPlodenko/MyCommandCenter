@@ -1,5 +1,5 @@
-import { Component } from '/src/js/features/pages/components/Component.mjs';
-import { Search } from '/src/js/features/Search.mjs';
+import { Component } from '/src/js/features/pages/components/Component.js';
+import { Search } from '/src/js/features/Search.js';
 
 /**
  * NotFoundComponent.
