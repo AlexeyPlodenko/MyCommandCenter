@@ -3,12 +3,10 @@ An application to manage your daily computer routine and run CLI commands from t
 
 # @TODO
 
-* Build process - everything from package.json devDependencies section.
+* Implement build process: compile, concat, uglify, publish dist.
 * Move CSS to SCSS.
 * Angular?
 * Templates and HTML sharing.
-* .html <head> section.
 * Translations.
 * File icons automatic usage as main image.
 * Use PouchDB as data provider.
-

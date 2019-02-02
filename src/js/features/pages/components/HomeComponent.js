@@ -1,5 +1,6 @@
 import { Component } from '/src/js/features/pages/components/Component.js';
 import { Search } from '/src/js/features/Search.js';
+import { DynamicInputComponent } from '../../../../components/dynamic_input/js/DynamicInputComponent.js';
 
 const menuItems = new Map();
 menuItems.set('menu_home', {
@@ -37,6 +38,7 @@ let menuOpenItemId;
  * @constructor
  * @public
  * @property {Search} _search
+ * @property {DynamicInputComponent} _menuAddFileArguments
  */
 export class HomeComponent extends Component {
     /**
@@ -62,7 +64,9 @@ export class HomeComponent extends Component {
             }
         }
 
-        $('#menu a[data-show-menu-item]').click((ev) => {
+        const $menu = $('#menu');
+
+        $menu.find('a[data-show-menu-item]').click((ev) => {
             // ugly hack, closing bootstrap's drop-down @TODO implement properly
             $('body').trigger('click');
 
@@ -73,10 +77,13 @@ export class HomeComponent extends Component {
         });
 
         $('[data-toggle="tooltip"]').tooltip();
+
+        this._menuAddFileArguments = new DynamicInputComponent($menu);
+        this._menuAddFileArguments.init();
     }
 
     /**
-     * openMenuItem
+     * openMenuItem.
      *
      * @param {String} itemId
      */

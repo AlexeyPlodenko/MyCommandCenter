@@ -44,7 +44,7 @@ export class Router {
         const routes = this._app.packageJson.getRoutes();
 
         let route;
-        if (urlPath in routes) {
+        if (routes.hasOwnProperty(urlPath)) {
             route = routes[urlPath];
         } else {
             route = routes[''];

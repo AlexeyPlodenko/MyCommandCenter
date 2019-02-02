@@ -32,7 +32,7 @@ body, table, input, textarea {
 
 .actions {
     /*background: orange;*/
-    width: calc(100% - 250px);
+    width: calc(100% - 300px);
     height: 100%;
     display: inline-block;
     padding: 10px;
@@ -50,7 +50,7 @@ body, table, input, textarea {
 
 .menu {
     /*background: blue;*/
-    width: 250px;
+    width: 300px;
     height: 100%;
     display: inline-block;
     float: right;

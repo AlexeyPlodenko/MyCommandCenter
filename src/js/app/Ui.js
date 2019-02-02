@@ -73,7 +73,7 @@ export class Ui {
             this._tpls = {};
         }
 
-        if (!(tmplName in this._tpls)) {
+        if (!this._tpls.hasOwnProperty(tmplName)) {
             const tmplPath = './src/templates/pages/' + tmplName +'.html';
 
             this._tpls[tmplName] = JsRender.templates(tmplPath);
