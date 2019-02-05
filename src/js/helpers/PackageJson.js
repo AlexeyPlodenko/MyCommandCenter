@@ -4,9 +4,8 @@ const Fs = require('fs'),
 /**
  * PackageJson.
  *
+ * @TODO rename this to config. provider
  * @class
- * @constructor
- * @public
  * @property {Object} _packageData
  */
 export class PackageJson {
@@ -53,7 +52,7 @@ export class PackageJson {
         const packagePath = Path.join(baseDir, '/package.json');
 
         if (!Fs.existsSync(packagePath)) {
-            throw 'File /package.json does not exist.';
+            throw new Error('File /package.json does not exist.');
         }
 
         const packageJson = Fs.readFileSync(packagePath, 'utf8');

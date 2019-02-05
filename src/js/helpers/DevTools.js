@@ -56,3 +56,17 @@ export class DevTools {
         }
     }
 }
+
+/**
+ * @param  {...any} params 
+ */
+export function log(...params) {
+    console.log(...params);
+}
+
+/**
+ * @param  {...any} params 
+ */
+export function logError(...params) {
+    console.error(...params);
+}

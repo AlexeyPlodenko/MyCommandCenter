@@ -9,9 +9,9 @@
         "start": "nw"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.7.0",
+        "@fortawesome/fontawesome-free": "^5.7.1",
         "bootstrap": "^4.2.1",
-        "eslint": "^5.12.1",
+        "eslint": "^5.13.0",
         "gulp": "^4.0.0",
         "gulp-sass": "^4.0.2",
         "gulp-uglify": "^3.0.1",

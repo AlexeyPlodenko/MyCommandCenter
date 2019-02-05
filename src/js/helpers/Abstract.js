@@ -2,8 +2,6 @@
  * Abstract.
  *
  * @class
- * @constructor
- * @private
  */
 export class Abstract {
     /**
@@ -11,7 +9,7 @@ export class Abstract {
      */
     constructor() {
         if (new.target === Abstract) {
-            throw 'Cannot construct Abstract instances directly.';
+            throw new Error('Cannot construct Abstract instances directly.');
         }
     }
 }

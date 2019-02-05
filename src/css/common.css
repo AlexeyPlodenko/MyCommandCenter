@@ -12,13 +12,13 @@ body, table, input, textarea {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .search {
     /*background: pink;*/
     height: 40px;
-    padding: 10px;
+    /* padding-bottom: 10px; */
 }
 .search_input {
     width: 100%;
@@ -26,7 +26,7 @@ body, table, input, textarea {
 
 .page {
     justify-content: space-between;
-    height: calc(100% - 40px);
+    height: 100%;
     /*background: red;*/
 }
 

@@ -1,11 +1,10 @@
-import { AbstractClient } from '/src/js/helpers/client/AbstractClient.js';
+import { AbstractClient } from "./AbstractClient.js";
+
 
 /**
  * ClientNwjs.
  *
  * @class
- * @constructor
- * @private
  */
 export class ClientNwjs extends AbstractClient {
     /**
@@ -18,14 +17,14 @@ export class ClientNwjs extends AbstractClient {
     }
 
     /**
-     * @returns {String}
+     * @returns {string}
      */
     getPath() {
         return this.path$.value;
     }
 
     /**
-     * @param {String} url
+     * @param {string} url
      */
     redirect(url) {
         this.path$.next(url);

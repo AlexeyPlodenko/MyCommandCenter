@@ -1,11 +1,9 @@
-import { AbstractClient } from '/src/js/helpers/client/AbstractClient.js';
+import { AbstractClient } from "./AbstractClient.js";
 
 /**
  * ClientBrowser.
  *
  * @class
- * @constructor
- * @public
  */
 export class ClientBrowser extends AbstractClient {
     /**
@@ -16,7 +14,7 @@ export class ClientBrowser extends AbstractClient {
     }
 
     /**
-     * @param {String} url
+     * @param {string} url
      */
     redirect(url) {
         this.path$.next(url);

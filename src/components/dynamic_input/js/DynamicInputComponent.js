@@ -1,5 +1,5 @@
 import { AbstractComponent } from "../../../js/components/AbstractComponent.js";
-import { FormHelpers } from "../../../js/helpers/ui/FormHelpers.js";
+import { FormHelper } from "../../../js/helpers/ui/FormHelper.js";
 
 /**
  * DynamicInput.
@@ -18,15 +18,17 @@ export class DynamicInputComponent extends AbstractComponent {
      * Constructor.
      * 
      * @param {JQuery} $container 
+     * @param {App} app
      */
-    constructor($container) {
-        super();
+    constructor($container, app) {
+        super(app);
 
         this._$container = $container;
         this._selectorField = '.dynamic_field';
         this._selectorAddFieldBtn = '.dynamic_field_add';
         this._selectorRemoveFieldBtn = '.dynamic_field_remove';
         this._elementsCounter = 1;
+        this._maxElements = 0; // 0 - to disable the limit
     }
 
     /**
@@ -35,16 +37,21 @@ export class DynamicInputComponent extends AbstractComponent {
     init() {
         // clone element, once "add" button is clicked
         $(document).on('click', this._selectorAddFieldBtn, (ev) => {
-            const $fieldContainer = $(ev.target).closest(this._selectorField);
-            
-            const $inputCopy = $fieldContainer.clone();
-            FormHelpers.resetElements($inputCopy.find('input'));
-            $fieldContainer.after($inputCopy);
+            if (!this._maxElements || this._elementsCounter < this._maxElements) {
+                // add one more, only if limit is not reached
 
-            $fieldContainer.find(this._selectorAddFieldBtn).hide();
-            $fieldContainer.find(this._selectorRemoveFieldBtn).show();
+                const $fieldContainer = $(ev.target).closest(this._selectorField);
+                
+                const $inputCopy = $fieldContainer.clone();
+                FormHelper.resetElements($inputCopy.find('input'));
+                $fieldContainer.after($inputCopy);
 
-            this._elementsCounter++;
+
+                $fieldContainer.find(this._selectorAddFieldBtn).hide();
+                $fieldContainer.find(this._selectorRemoveFieldBtn).show();
+
+                this._elementsCounter++;
+            }
         });
 
         // remove element, once "remove" button is clicked

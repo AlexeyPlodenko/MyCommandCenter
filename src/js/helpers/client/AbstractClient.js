@@ -1,13 +1,14 @@
+import { Abstract } from '../Abstract.js';
+
 const BehaviorSubject = require('rxjs/BehaviorSubject').BehaviorSubject;
 
-import { Abstract } from '/src/js/helpers/Abstract.js';
 
 /**
  * AbstractClient.
  *
  * @class
- * @constructor
- * @public
+ * @abstract getPath
+ * @abstract redirect
  * @property {BehaviorSubject} path$
  */
 export class AbstractClient extends Abstract {
@@ -18,14 +19,16 @@ export class AbstractClient extends Abstract {
         super();
 
         if (new.target === AbstractClient) {
-            throw 'Cannot construct AbstractClient instances directly.';
+            throw new Error(
+                'Cannot construct AbstractClient instances directly.'
+            );
         }
 
         if (typeof this.getPath !== 'function') {
-            throw 'Class must implement the method "getPath".';
+            throw new Error('Class must implement the method "getPath".');
         }
         if (typeof this.redirect !== 'function') {
-            throw 'Class must implement the method "redirect".';
+            throw new Error('Class must implement the method "redirect".');
         }
 
         this.path$ = new BehaviorSubject();

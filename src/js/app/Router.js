@@ -1,17 +1,8 @@
-const Fs = require('fs'),
-      Path = require('path');
-
-import { Ui } from '/src/js/app/Ui.js';
-
 /**
  * Responsible for routing URL to components.
  *
  * @class
- * @constructor
- * @public
- * @property {Object} _routes
  * @property {App} _app
- * @property {BehaviorSubject} path
  */
 export class Router {
     /**
