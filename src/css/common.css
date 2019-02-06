@@ -52,13 +52,9 @@ body, table, input, textarea {
     /*background: blue;*/
     width: 300px;
     height: 100%;
-    display: inline-block;
     float: right;
     padding: 10px 10px 10px 25px;
     position: relative;
-}
-.menu_btn {
-
 }
 .menu_collapse {
     font-size: 16px;

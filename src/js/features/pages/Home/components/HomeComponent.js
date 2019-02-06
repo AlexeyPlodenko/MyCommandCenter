@@ -5,6 +5,7 @@ import { ActionModel } from "../../../actions/ActionModel.js";
 import { ActionsRepository } from "../../../actions/ActionsRepository.js";
 import { Search } from "../../../Search.js";
 import { AbstractPageComponent } from "../../AbstractPageComponent.js";
+import { AppException } from "../../../../exceptions/AppException.js";
 
 /**
  * HomeComponent.
@@ -26,6 +27,13 @@ export class HomeComponent extends AbstractPageComponent {
             if (!item.open) {
                 this._app.ui.hide('#'+ itemId);
             } else {
+                if (this.menu.openItemId !== '') {
+                    throw new AppException(
+                        'There are more then 1 item marked as open in the '+
+                        'menu config. map. There should be only one.'
+                    );
+                }
+
                 this.menu.openItemId = itemId;
             }
         }
@@ -38,7 +46,7 @@ export class HomeComponent extends AbstractPageComponent {
 
             const itemIdClicked = $(ev.target).attr('data-show-menu-item');
             this.openMenuItem(itemIdClicked);
-            
+
             return false;
         });
 
@@ -47,9 +55,8 @@ export class HomeComponent extends AbstractPageComponent {
             const $elements = FormHelper.getEditableElements($this);
             const data = FormHelper.getValues($elements);
 
-            const action = new ActionModel();
-            action.setData(data);
-            
+            const action = ActionModel.createFromData(data);
+
 log('data', action);
             return false;
         });
