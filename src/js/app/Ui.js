@@ -1,6 +1,7 @@
 import { Abstract } from '../helpers/Abstract.js';
 import { App } from './App.js';
 import { log } from '../helpers/DevTools.js';
+import { AbstractPageComponent } from '../features/pages/AbstractPageComponent.js';
 
 const JsRender = require('jsrender/jsrender-node');
 
@@ -9,7 +10,9 @@ const JsRender = require('jsrender/jsrender-node');
  *
  * @class
  * @property {App} _app
- * @property {JQuery} _$body
+ * @property {JQuery} $body
+ * @property {AbstractPageComponent} _currentPageComponent
+ *
  */
 export class Ui extends Abstract {
     /**
@@ -21,7 +24,7 @@ export class Ui extends Abstract {
         super();
 
         this._app = app;
-        this._$body = $('body');
+        this.$body = $('body');
     }
 
     /**
@@ -72,10 +75,10 @@ export class Ui extends Abstract {
 
         const $compNode = $(html);
 
-        this._$body.empty();
-        this._$body.append($compNode);
+        this.$body.empty();
+        this.$body.append($compNode);
 
-        $('body').html(html);
+        this.$body.html(html);
     }
 
     /**
@@ -83,28 +86,41 @@ export class Ui extends Abstract {
      */
     init() {
         this._app.client.path$.subscribe((path) => {
-            log('URL path has changed', path);
+            // create component based on the updated path
 
             const urlPath = this._app.client.getPath();
             const route = this._app.router.getRouteByPath(urlPath);
 
-            const comp = this._app.componentFactory.createComponent(
-                route.component
-            );
+            /* @type {AbstractPageComponent} */
+            this._currentPageComponent = this._app.pageComponentFactory
+                                                            .createComponent(
+                                                                route.component
+                                                            );
 
-            comp.state.subscribe((state) => {
-                log('Current component state has changed: ', state);
+            // this._currentPageComponent.store.state$.subscribe((state) => {
+                // once component is ready, render the template
 
-                this._app.ui.renderTemplate(route.template, state);
+                // this._app.ui.renderTemplate(route.template, state);
+                this._app.ui.renderTemplate(route.template, {});
 
                 setTimeout(() => {
-                    // wait until element is in DOM.
-                    // @TODO rewrite with mutationObserver
+                    // wait for the template to render in DOM and then run
+                    // the component
+                    // @TODO rewrite setTimeout with mutationObserver
 
-                    comp.init();
+                    this._currentPageComponent.init();
+                    this._currentPageComponent.initProvidedComponents();
+                    // this._currentPageComponent.storeUpdated(state);
                 }, 0);
-            });
+            // });
         });
+    }
+
+    /**
+     * @returns {AbstractPageComponent}
+     */
+    getCurrentPageComponent() {
+        return this._currentPageComponent;
     }
 
     /**
@@ -112,7 +128,7 @@ export class Ui extends Abstract {
      * @returns {string}
      */
     _getComponentNodeId(tmplName) {
-        return tmplName +'Component';
+        return tmplName +'PageComponent';
     }
 
     /**

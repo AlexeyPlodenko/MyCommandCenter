@@ -2,9 +2,9 @@ import { App } from "./app/App.js";
 import { logError } from "./helpers/DevTools.js";
 
 /**
- * A bootstrap's error handling class. Lets keep it here so errors may be
- * caught early.
- * 
+ * A bootstrap's error handling class.
+ * Lets keep it here so errors may be caught early.
+ *
  * @class
  * @property {string} _storageKey A name of the key to use in localstorage.
  * @property {number} _maxErrors Max. ammount of errors to store. The rest
@@ -20,20 +20,22 @@ class ErrorsStorage {
     }
 
     /**
-     * @param {any} error 
+     * @param {any} error
      */
     add(error) {
+        error.date = new Date();
+
         const storedErrors = this.getAll();
-        storedErrors.push(error);
+        storedErrors.unshift(error);
         storedErrors.splice(this._maxErrors);
-    
+
         const storedErrorsJson = JSON.stringify(storedErrors);
         localStorage.setItem(this._storageKey, storedErrorsJson);
     }
 
     /**
      * Load the errors from the localstorage and return.
-     * 
+     *
      * @returns {array}
      */
     getAll() {
@@ -67,19 +69,27 @@ class ErrorsStorage {
         localStorage.removeItem(this._storageKey);
     }
 }
-
 // ------------------------------------------------------------------------
 
 const errors = new ErrorsStorage();
 
 // handling exception from Node
 process.on('unhandledRejection', function (reason, promise) {
+    handleNodeJsException('UnhandledRejection', reason, promise);
+});
+process.on('uncaughtException', function (reason, promise) {
+    handleNodeJsException('UncaughtException', reason, promise);
+});
+function handleNodeJsException(type, reason, promise) {
+    logError(reason, promise);
+
     errors.add({
-        type: 'UnhandledRejection',
+        type: type,
+        stack: reason.stack,
         reason: reason,
         promise: promise
     });
-});
+}
 
 // handling errors in Chrome
 window.onerror = function myErrorHandler(msg, url, lineNo, columnNo, error) {
@@ -117,9 +127,9 @@ window.onerror = function myErrorHandler(msg, url, lineNo, columnNo, error) {
 
                     break;
             }
-            
+
             console.group('#'+ (i + 1));
-            
+
             if (msg !== undefined) {
                 logError(msg);
             }
@@ -140,8 +150,9 @@ try {
 } catch (ex) {
     // handling errors from the App. itself
 
-    errors.add({
-        type: 'RuntimeException',
-        exception: ex
-    });
+    // errors.add({
+    //     type: 'AppException',
+    //     exception: ex // @TOOD if use this way, need to store ex. properly
+    // });
+    logError('AppException', ex);
 }

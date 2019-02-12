@@ -11,6 +11,8 @@ export class AbstractDataProvider extends Abstract {
      * Constructor.
      */
     constructor() {
+        super();
+
         if (new.target === AbstractDataProvider) {
             throw new Error(
                 'Cannot construct AbstractDataProvider instances directly.'

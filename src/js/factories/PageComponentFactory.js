@@ -1,34 +1,33 @@
-import { HomeComponent } from '../features/pages/Home/components/HomeComponent.js';
-import { NotFoundComponent } from '../features/pages/NotFound/components/NotFoundComponent.js';
 import { AbstractFactory } from './AbstractFactory.js';
-import { log } from '../helpers/DevTools.js';
+import { HomePageComponent } from '../features/pages/Home/components/HomePageComponent.js';
+import { NotFoundPageComponent } from '../features/pages/NotFound/components/NotFoundPageComponent.js';
 
 const components = {
-    Home: HomeComponent,
-    NotFound: NotFoundComponent
+    Home: HomePageComponent,
+    NotFound: NotFoundPageComponent
 };
 
 /**
- * ComponentFactory.
+ * PageComponentFactory.
  *
  * @class
  * @property {App} _app
  */
-export class ComponentFactory extends AbstractFactory {
+export class PageComponentFactory extends AbstractFactory {
     /**
      * Constructor.
      *
-     * @param {App} app 
+     * @param {App} app
      */
     constructor(app) {
         super();
 
         this._app = app;
     }
-    
+
     /**
      * @param {string} name
-     * @returns {Component|undefined}
+     * @returns {AbstractPageComponent|undefined}
      */
     createComponent(name) {
         return (
@@ -39,7 +38,7 @@ export class ComponentFactory extends AbstractFactory {
         // @TODO. ATM dynamic class instantiation does not work, ends with an error -
         // SyntaxError: Unexpected token {
 //        const baseDir = process.cwd();
-//        const compPath = Path.join(baseDir, '/src/js/features/pages/components/'+ name +'Component.js');
+//        const compPath = Path.join(baseDir, '/src/js/features/pages/components/'+ name +'PageComponent.js');
 //
 //        return require(compPath);
     }

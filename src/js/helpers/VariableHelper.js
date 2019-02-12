@@ -12,4 +12,23 @@ export class VariableHelper extends Abstract {
     static isEmpty(data) {
         return isEmpty(data);
     }
+
+    /**
+     * Check that variable is an array.
+     *
+     * @param {any} data
+     */
+    static isArray(data) {
+        return Array.isArray(data);
+    }
+
+    /**
+     * Check if the key exists in data set.
+     *
+     * @param {any} data
+     * @param {string} key
+     */
+    static hasKey(data, key) {
+        return data.hasOwnProperty(key);
+    }
 }

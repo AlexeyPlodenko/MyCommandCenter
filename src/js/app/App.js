@@ -3,7 +3,8 @@ import { Ui } from './Ui.js';
 import { Router } from './Router.js';
 import { PackageJson } from '../helpers/PackageJson.js';
 import { ClientNwjs } from '../helpers/client/ClientNwjs.js';
-import { ComponentFactory } from '../factories/ComponentFactory.js';
+import { LocalStorageDataProvider } from '../helpers/data_providers/LocalStorageDataProvider.js';
+import { PageComponentFactory } from '../factories/PageComponentFactory.js';
 
 const Fs = require('fs'),
       Path = require('path'),
@@ -17,7 +18,7 @@ const Fs = require('fs'),
  * @property {Ui} ui
  * @property {Router} router
  * @property {PackageJson} packageJson
- * @property {ComponentFactory} componentFactory
+ * @property {pageComponentFactory} pageComponentFactory
  * @property {string} _env
  * @property {boolean} _envIsDev
  */
@@ -41,15 +42,19 @@ export class App {
         this.client = new ClientNwjs();
         this.ui = new Ui(this);
         this.router = new Router(this);
-        this.componentFactory = new ComponentFactory(this);
+        this.pageComponentFactory = new PageComponentFactory(this);
+        this.storage = new LocalStorageDataProvider();
+
         $(() => {
+            // init. the app's UI as soon as DOM is ready
+
             this.ui.init();
         });
     }
 
     /**
      * Return if current env. is dev.
-     * 
+     *
      * @returns {boolean}
      */
     isDevEnv() {
@@ -58,7 +63,7 @@ export class App {
 
     /**
      * Return if current env. is prod.
-     * 
+     *
      * @returns {boolean}
      */
     isProdEnv() {

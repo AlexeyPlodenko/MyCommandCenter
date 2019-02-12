@@ -50,7 +50,7 @@ export class DevTools {
                         this._reloadWatchers[i].close();
                     }
 
-                    location.reload(true);
+                    window.location.reload(true);
                 }
             });
         }
@@ -58,14 +58,14 @@ export class DevTools {
 }
 
 /**
- * @param  {...any} params 
+ * @param  {...any} params
  */
 export function log(...params) {
     console.log(...params);
 }
 
 /**
- * @param  {...any} params 
+ * @param  {...any} params
  */
 export function logError(...params) {
     console.error(...params);

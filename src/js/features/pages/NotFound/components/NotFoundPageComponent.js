@@ -1,11 +1,11 @@
 import { AbstractPageComponent } from "../../AbstractPageComponent.js";
 
 /**
- * NotFoundComponent.
+ * NotFoundPageComponent.
  *
  * @class
  */
-export class NotFoundComponent extends AbstractPageComponent {
+export class NotFoundPageComponent extends AbstractPageComponent {
     /**
      * Constructor.
      *

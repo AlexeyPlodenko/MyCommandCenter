@@ -2,7 +2,6 @@ import { Abstract } from '../Abstract.js';
 
 const BehaviorSubject = require('rxjs/BehaviorSubject').BehaviorSubject;
 
-
 /**
  * AbstractClient.
  *
@@ -31,6 +30,6 @@ export class AbstractClient extends Abstract {
             throw new Error('Class must implement the method "redirect".');
         }
 
-        this.path$ = new BehaviorSubject();
+        this.path$ = new BehaviorSubject('');
     }
 }

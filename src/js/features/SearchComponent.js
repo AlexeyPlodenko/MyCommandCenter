@@ -1,19 +1,28 @@
+import { AbstractComponent } from "../components/AbstractComponent.js";
+
 /**
  * Search.
  *
  * @class
- * @constructor
- * @public
  * @property {Boolean} _focusLock
  */
-export class Search {
+export class SearchComponent extends AbstractComponent {
     /**
      * Constructor.
      *
      * @param {App} app
      */
     constructor(app) {
+        super(app);
+
         this._focusLock = true;
+    }
+
+    /**
+     * Init.
+     */
+    init() {
+        this.$searchInput = $('#search_input');
 
         this._setUiFocus();
     }
@@ -47,11 +56,9 @@ export class Search {
      * _setUiFocus
      */
     _setUiFocus() {
-        const $search_input = $('#search_input');
-        
-        $search_input.focus();
+        this.$searchInput.focus();
 
-        $search_input.on('blur', (ev) => {
+        this.$searchInput.on('blur', (ev) => {
             if (this.isFocusLocked()) {
                 $(ev.target).focus();
             }
@@ -62,6 +69,6 @@ export class Search {
      * _removeUiFocus.
      */
     _removeUiFocus() {
-        $('#search_input').off('blur');
+        this.$searchInput.off('blur');
     }
 }

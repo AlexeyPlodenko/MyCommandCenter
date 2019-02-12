@@ -1,16 +1,18 @@
 import { Abstract } from "../helpers/Abstract.js";
-import { ActionModel } from "../features/actions/ActionModel.js";
 import { VariableHelper } from "../helpers/VariableHelper.js";
 import { AppException } from "../exceptions/AppException.js";
 
 /**
  * @class
+ * @property {any} _data
  */
 export class AbstractModel extends Abstract {
     /**
      * Constructor.
+     *
+     * @param {any} data
      */
-    constructor() {
+    constructor(data) {
         super();
 
         if (new.target === AbstractModel) {
@@ -28,27 +30,40 @@ export class AbstractModel extends Abstract {
 
             // throw new Error('Class must implement the method "isDataValid".');
         // }
+
+        this._data = {};
+    }
+
+    /**
+     * Get a list of model's properties.
+     *
+     * @returns {string[]}
+     */
+    getModelPropertyNames() {
+        return Object.getOwnPropertyNames(this);
     }
 
     /**
      * Fill the model from the data in the 1st argument.
      *
-     * @param {<[string, string|string[]]>} data
-     * @param {boolean} abortOnUnknownKey
+     * @param {any} data
+     * @param {boolean} throwExceptionOnUnknownKey
      * @param {boolean} emptyValuesAllowed
      */
-    setData(data, abortOnUnknownKey = true, emptyValuesAllowed = true) {
+    setData(data,
+            throwExceptionOnUnknownKey = true,
+            emptyValuesAllowed = true) {
         for (const key in data) {
             // iterate over the data set and assign the value
 
-            if (this.hasOwnProperty(key)) {
+            if (key in this._data) {
                 if (emptyValuesAllowed || !VariableHelper.isEmpty(data[key])) {
                     // store only if empty values are allowed or not empty
-                    this[key] = data[key];
+                    this._data[key] = data[key];
                 }
                 // otherwise skip
 
-            } else if (!abortOnUnknownKey) {
+            } else if (!throwExceptionOnUnknownKey) {
                 throw new AppException(
                     'Property "'+ key +'" does not exist in this model. '+
                     'Either set the 2nd argument to TRUE or check data '+
@@ -56,6 +71,29 @@ export class AbstractModel extends Abstract {
                 );
             }
         }
+    }
+
+    /**
+     * @returns {any}
+     */
+    getData() {
+        return this._data;
+    }
+
+    /**
+     * @returns {any}
+     */
+    toJSON() {
+        return this._data;
+    }
+
+    /**
+     * Create an instance of a model and pre-fill it.
+     *
+     * @param {any} data
+     */
+    static fromJSON(data) {
+        return AbstractModel.createFromData(data);
     }
 
     /**
