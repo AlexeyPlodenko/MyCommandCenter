@@ -1,4 +1,4 @@
-import { Abstract } from '../Abstract.js';
+import { Abstract } from '../Abstract.mjs';
 
 const BehaviorSubject = require('rxjs/BehaviorSubject').BehaviorSubject;
 

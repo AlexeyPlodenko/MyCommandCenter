@@ -1,5 +1,6 @@
-import { Abstract } from "../helpers/Abstract.js";
-import { App } from "../app/App.js";
+import { Abstract } from "../helpers/Abstract.mjs";
+import { App } from "../app/App.mjs";
+import { Store } from "../helpers/Store.mjs";
 
 /**
  * Component.
@@ -33,5 +34,6 @@ export class AbstractComponent extends Abstract {
 
         this._app = app;
         this.reusable = true;
+        this.state = new Store();
     }
 }

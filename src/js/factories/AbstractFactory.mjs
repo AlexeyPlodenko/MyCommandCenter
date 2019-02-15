@@ -1,4 +1,4 @@
-import { Abstract } from "../helpers/Abstract.js";
+import { Abstract } from "../helpers/Abstract.mjs";
 
 export class AbstractFactory extends Abstract {
     /**

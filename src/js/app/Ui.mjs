@@ -1,7 +1,6 @@
-import { Abstract } from '../helpers/Abstract.js';
-import { App } from './App.js';
-import { log } from '../helpers/DevTools.js';
-import { AbstractPageComponent } from '../features/pages/AbstractPageComponent.js';
+import { Abstract } from '../helpers/Abstract.mjs';
+import { App } from './App.mjs';
+import { AbstractPageComponent } from '../features/pages/AbstractPageComponent.mjs';
 
 const JsRender = require('jsrender/jsrender-node');
 

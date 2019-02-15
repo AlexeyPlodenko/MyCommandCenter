@@ -1,4 +1,4 @@
-import { AbstractException } from "./AbstractException.js";
+import { AbstractException } from "./AbstractException.mjs";
 
 /**
  * @class

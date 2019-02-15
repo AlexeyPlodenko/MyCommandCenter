@@ -1,5 +1,5 @@
-import { AbstractModel } from "../../models/AbstractModel.js";
-import { VariableHelper } from "../../helpers/VariableHelper.js";
+import { AbstractModel } from "../../models/AbstractModel.mjs";
+import { VariableHelper } from "../../helpers/VariableHelper.mjs";
 
 /**
  * @class

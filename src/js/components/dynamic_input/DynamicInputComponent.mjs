@@ -1,5 +1,6 @@
-import { AbstractComponent } from "../../../js/components/AbstractComponent.js";
-import { FormHelper } from "../../../js/helpers/ui/FormHelper.js";
+import { AbstractComponent } from "../AbstractComponent.mjs";
+import { FormHelper } from "../../helpers/ui/FormHelper.mjs";
+
 
 /**
  * DynamicInput.
@@ -16,8 +17,8 @@ import { FormHelper } from "../../../js/helpers/ui/FormHelper.js";
 export class DynamicInputComponent extends AbstractComponent {
     /**
      * Constructor.
-     * 
-     * @param {JQuery} $container 
+     *
+     * @param {JQuery} $container
      * @param {App} app
      */
     constructor($container, app) {
@@ -41,7 +42,7 @@ export class DynamicInputComponent extends AbstractComponent {
                 // add one more, only if limit is not reached
 
                 const $fieldContainer = $(ev.target).closest(this._selectorField);
-                
+
                 const $inputCopy = $fieldContainer.clone();
                 FormHelper.resetElements($inputCopy.find('input'));
                 $fieldContainer.after($inputCopy);

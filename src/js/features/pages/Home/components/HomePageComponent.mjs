@@ -1,15 +1,15 @@
-import { ActionsRepository } from "../../../actions/ActionsRepository.js";
-import { AbstractPageComponent } from "../../AbstractPageComponent.js";
-import { SearchComponent } from "../../../SearchComponent.js";
-import { MenuComponent } from "../../../MenuComponent.js";
-import { App } from "../../../../app/App.js";
+import { ActionsRepository } from "../../../actions/ActionsRepository.mjs";
+import { AbstractPageComponent } from "../../AbstractPageComponent.mjs";
+import { App } from "../../../../app/App.mjs";
+import { MenuComponent } from "../../../../components/MenuComponent.mjs";
+import { SearchComponent } from "../../../../components/SearchComponent.mjs";
+import { ActionsComponent } from "../../../../components/actions/ActionsComponent.mjs";
 
 /**
  * HomePageComponent.
  *
  * @class
  * @property {SearchComponent} _search
- * @property {DynamicInputComponent} _menuAddFileArguments
  * @property {ActionsRepository} actions
  */
 export class HomePageComponent extends AbstractPageComponent {
@@ -28,6 +28,10 @@ export class HomePageComponent extends AbstractPageComponent {
         this.registerProvidedComponent(
             'search',
             new SearchComponent(this._app)
+        );
+        this.registerProvidedComponent(
+            'actions',
+            new ActionsComponent(this._app)
         );
 
         this.actions = new ActionsRepository(app.storage);

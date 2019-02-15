@@ -1,4 +1,4 @@
-import { Abstract } from "../Abstract.js";
+import { Abstract } from "../Abstract.mjs";
 
 /**
  * @class
@@ -6,8 +6,8 @@ import { Abstract } from "../Abstract.js";
 export class FormHelper extends Abstract {
     /**
      * Reset elements to it default state and clear text inputs.
-     * 
-     * @param {JQuery} $elements 
+     *
+     * @param {JQuery} $elements
      * @returns {JQuery}
      */
     static resetElements($elements) {
@@ -22,7 +22,7 @@ export class FormHelper extends Abstract {
     /**
      * Extract values from the form elements and return. Elements, which name
      * ends with [], will be returned as arrays of strings.
-     * 
+     *
      * @param {JQuery} $elements
      * @returns {object}
      */
@@ -59,8 +59,8 @@ export class FormHelper extends Abstract {
 
     /**
      * Return a jQuery collection of elements that are editable.
-     * 
-     * @param {JQuery} $container 
+     *
+     * @param {JQuery} $container
      * @returns {JQuery}
      */
     static getEditableElements($container) {

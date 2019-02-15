@@ -1,5 +1,5 @@
-import { AbstractRepository } from "../../repositories/AbstractRepository.js";
-import { ActionModel } from "./ActionModel.js";
+import { AbstractRepository } from "../../repositories/AbstractRepository.mjs";
+import { ActionModel } from "./ActionModel.mjs";
 
 /**
  * @property {ActionModel[]} _actions

@@ -1,4 +1,4 @@
-import { AbstractDataProvider } from "./AbstractDataProvider.js";
+import { AbstractDataProvider } from "./AbstractDataProvider.mjs";
 
 /**
  * LocalStorageDataProvider.
@@ -12,22 +12,22 @@ export class LocalStorageDataProvider extends AbstractDataProvider {
     }
 
     /**
-     * @param {string} key 
+     * @param {string} key
      */
     get(key) {
         return localStorage.getItem(key);
     }
 
     /**
-     * @param {string} key 
-     * @param {any} value 
+     * @param {string} key
+     * @param {any} value
      */
     set(key, value) {
         localStorage.setItem(key, value);
     }
 
     /**
-     * @param {string} key 
+     * @param {string} key
      */
     remove(key) {
         localStorage.removeItem(key);

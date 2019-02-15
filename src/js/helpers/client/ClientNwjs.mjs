@@ -1,4 +1,4 @@
-import { AbstractClient } from "./AbstractClient.js";
+import { AbstractClient } from "./AbstractClient.mjs";
 
 
 /**

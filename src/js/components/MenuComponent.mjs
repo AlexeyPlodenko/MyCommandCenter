@@ -1,16 +1,15 @@
-import { AbstractComponent } from "../components/AbstractComponent.js";
-import { DynamicInputComponent } from "../../components/dynamic_input/js/DynamicInputComponent.js";
-import { AppException } from "../exceptions/AppException.js";
-import { FormHelper } from "../helpers/ui/FormHelper.js";
-import { VariableHelper } from "../helpers/VariableHelper.js";
-import { ActionModel } from "./actions/ActionModel.js";
-import { log } from "../helpers/DevTools.js";
+import { AbstractComponent } from "./AbstractComponent.mjs";
+import { AppException } from "../exceptions/AppException.mjs";
+import { FormHelper } from "../helpers/ui/FormHelper.mjs";
+import { VariableHelper } from "../helpers/VariableHelper.mjs";
+import { ActionModel } from "../features/actions/ActionModel.mjs";
+import { log } from "../helpers/DevTools.mjs";
+import { DynamicInputComponent } from "./dynamic_input/DynamicInputComponent.mjs";
 
 /**
  * Menu.
  *
  * @class
- * @property {App} _app
  * @property {Map} items A collection of menu items, that are shown in UI.
  * @property {string} openItemId
  */
