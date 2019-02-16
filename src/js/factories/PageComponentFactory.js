@@ -1,6 +1,6 @@
-import { AbstractFactory } from './AbstractFactory.mjs';
-import { HomePageComponent } from '../features/pages/Home/components/HomePageComponent.mjs';
-import { NotFoundPageComponent } from '../features/pages/NotFound/components/NotFoundPageComponent.mjs';
+import { AbstractFactory } from './AbstractFactory.js';
+import { HomePageComponent } from '../features/pages/Home/components/HomePageComponent.js';
+import { NotFoundPageComponent } from '../features/pages/NotFound/components/NotFoundPageComponent.js';
 
 const components = {
     Home: HomePageComponent,
@@ -38,7 +38,7 @@ export class PageComponentFactory extends AbstractFactory {
         // @TODO. ATM dynamic class instantiation does not work, ends with an error -
         // SyntaxError: Unexpected token {
 //        const baseDir = process.cwd();
-//        const compPath = Path.join(baseDir, '/src/js/features/pages/components/'+ name +'PageComponent.mjs');
+//        const compPath = Path.join(baseDir, '/src/js/features/pages/components/'+ name +'PageComponent.js');
 //
 //        return require(compPath);
     }

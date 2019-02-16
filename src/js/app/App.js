@@ -1,10 +1,10 @@
-import { log, DevTools } from '../helpers/DevTools.mjs';
-import { Ui } from './Ui.mjs';
-import { Router } from './Router.mjs';
-import { PackageJson } from '../helpers/PackageJson.mjs';
-import { ClientNwjs } from '../helpers/client/ClientNwjs.mjs';
-import { LocalStorageDataProvider } from '../helpers/data_providers/LocalStorageDataProvider.mjs';
-import { PageComponentFactory } from '../factories/PageComponentFactory.mjs';
+import { log, DevTools } from "../helpers/DevTools.js";
+import { Ui } from "./Ui.js";
+import { Router } from "./Router.js";
+import { PackageJson } from "../helpers/PackageJson.js";
+import { ClientNwjs } from "../helpers/client/ClientNwjs.js";
+import { LocalStorageDataProvider } from "../helpers/data_providers/LocalStorageDataProvider.js";
+import { PageComponentFactory } from "../factories/PageComponentFactory.js";
 
 const Fs = require('fs'),
       Path = require('path'),

@@ -1,6 +1,6 @@
-import { Abstract } from "../helpers/Abstract.mjs";
-import { App } from "../app/App.mjs";
-import { Store } from "../helpers/Store.mjs";
+import { Abstract } from "../helpers/Abstract.js";
+import { App } from "../app/App.js";
+import { Store } from "../helpers/Store.js";
 
 /**
  * Component.

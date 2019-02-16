@@ -1,4 +1,4 @@
-import { Abstract } from "./Abstract.mjs";
+import { Abstract } from "./Abstract.js";
 
 const isEmpty = require('is-empty');
 

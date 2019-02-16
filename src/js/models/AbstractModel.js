@@ -1,6 +1,6 @@
-import { Abstract } from "../helpers/Abstract.mjs";
-import { VariableHelper } from "../helpers/VariableHelper.mjs";
-import { AppException } from "../exceptions/AppException.mjs";
+import { Abstract } from "../helpers/Abstract.js";
+import { VariableHelper } from "../helpers/VariableHelper.js";
+import { AppException } from "../exceptions/AppException.js";
 
 /**
  * @class

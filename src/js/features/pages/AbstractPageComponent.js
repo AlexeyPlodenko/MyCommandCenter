@@ -1,5 +1,5 @@
-import { AbstractComponent } from "../../components/AbstractComponent.mjs";
-import { Store } from "../../helpers/Store.mjs";
+import { AbstractComponent } from "../../components/AbstractComponent.js";
+import { Store } from "../../helpers/Store.js";
 
 /**
  * Component.

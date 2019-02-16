@@ -20,7 +20,7 @@
         "jsrender": "^1.0.1",
         "node-sass": "^4.11.0",
         "nw": "^0.35.5",
-        "popper.mjs": "^1.14.7",
+        "popper.js": "^1.14.7",
         "rxjs": "^6.4.0",
         "rxjs-compat": "^6.4.0",
         "vue": "^2.6.6"

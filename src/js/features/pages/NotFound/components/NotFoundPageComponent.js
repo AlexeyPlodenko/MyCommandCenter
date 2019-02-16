@@ -1,4 +1,4 @@
-import { AbstractPageComponent } from "../../AbstractPageComponent.mjs";
+import { AbstractPageComponent } from "../../AbstractPageComponent.js";
 
 /**
  * NotFoundPageComponent.

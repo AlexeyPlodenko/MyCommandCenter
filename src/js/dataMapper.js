@@ -1,4 +1,4 @@
-// import { ActionModel } from "./features/actions/ActionModel.mjs";
+// import { ActionModel } from "./features/actions/ActionModel.js";
 
 /**
  *

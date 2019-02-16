@@ -1,9 +1,9 @@
-import { Abstract } from "../helpers/Abstract.mjs";
-import { AbstractDataProvider } from "../helpers/data_providers/AbstractDataProvider.mjs";
-import { AbstractModel } from "../models/AbstractModel.mjs";
-import { logError } from "../helpers/DevTools.mjs";
-import { ActionModel } from "../features/actions/ActionModel.mjs";
-import { dataMapper } from "../dataMapper.mjs";
+import { Abstract } from "../helpers/Abstract.js";
+import { AbstractDataProvider } from "../helpers/data_providers/AbstractDataProvider.js";
+import { AbstractModel } from "../models/AbstractModel.js";
+import { logError } from "../helpers/DevTools.js";
+import { ActionModel } from "../features/actions/ActionModel.js";
+import { dataMapper } from "../dataMapper.js";
 
 const BehaviorSubject = require('rxjs/BehaviorSubject').BehaviorSubject;
 

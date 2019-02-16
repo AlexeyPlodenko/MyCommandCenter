@@ -1,6 +1,5 @@
-import { AbstractComponent } from "../AbstractComponent.mjs";
-import { FormHelper } from "../../helpers/ui/FormHelper.mjs";
-
+import { AbstractComponent } from "../AbstractComponent.js";
+import { FormHelper } from "../../helpers/ui/FormHelper.js";
 
 /**
  * DynamicInput.

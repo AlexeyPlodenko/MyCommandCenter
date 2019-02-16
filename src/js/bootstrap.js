@@ -1,5 +1,5 @@
-import { App } from "./app/App.mjs";
-import { logError } from "./helpers/DevTools.mjs";
+import { App } from "./app/App.js";
+import { logError } from "./helpers/DevTools.js";
 
 /**
  * A bootstrap's error handling class.

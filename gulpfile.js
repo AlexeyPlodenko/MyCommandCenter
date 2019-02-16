@@ -45,9 +45,9 @@ function devWatch(cb) {
 // }
 
 // function js() {
-//     return src('src/js/*.mjs', { sourcemaps: true })
+//     return src('src/js/*.js', { sourcemaps: true })
 //         .pipe(Uglify())
-//         .pipe(concat('app.mjs'))
+//         .pipe(concat('app.js'))
 //         .pipe(dest('build/js', { sourcemaps: true }))
 // }
 

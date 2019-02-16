@@ -1,4 +1,4 @@
-import { AbstractDataProvider } from "./AbstractDataProvider.mjs";
+import { AbstractDataProvider } from "./AbstractDataProvider.js";
 
 /**
  * LocalStorageDataProvider.
