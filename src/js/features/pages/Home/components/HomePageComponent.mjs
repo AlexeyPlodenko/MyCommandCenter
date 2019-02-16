@@ -3,7 +3,7 @@ import { AbstractPageComponent } from "../../AbstractPageComponent.mjs";
 import { App } from "../../../../app/App.mjs";
 import { MenuComponent } from "../../../../components/MenuComponent.mjs";
 import { SearchComponent } from "../../../../components/search/SearchComponent.mjs";
-import { ActionsComponent } from "../../../../components/actions/ActionsComponent.mjs";
+// import { ActionsComponent } from "../../../../components/actions/ActionsComponent.mjs";
 
 /**
  * HomePageComponent.
@@ -29,10 +29,10 @@ export class HomePageComponent extends AbstractPageComponent {
             'search',
             new SearchComponent(this._app)
         );
-        this.registerProvidedComponent(
-            'actions',
-            new ActionsComponent(this._app)
-        );
+        // this.registerProvidedComponent(
+        //     'actions',
+        //     new ActionsComponent(this._app)
+        // );
 
         this.actions = new ActionsRepository(app.storage);
         this.actions.load();

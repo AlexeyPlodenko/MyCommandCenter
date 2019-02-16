@@ -1,20 +1,25 @@
-import { AbstractComponent } from "../AbstractComponent.mjs";
+// import { AbstractComponent } from "../AbstractComponent.mjs";
 
-/**
- * Menu.
- *
- * @class
- */
-export class ActionsComponent extends AbstractComponent {
-    /**
-     * Constructor.
-     *
-     * @param {App} app
-     */
-    constructor(app) {
-        super(app);
-    }
+// /**
+//  * Menu.
+//  *
+//  * @class
+//  */
+// export class ActionsComponent extends AbstractComponent {
+//     /**
+//      * Constructor.
+//      *
+//      * @param {App} app
+//      */
+//     constructor(app) {
+//         super(app);
+//     }
 
-    init() {
-    }
+//     init() {
+//     }
+// }
+
+export default {
+    template: '#app-actions',
+    props: ['actions'],
 }

@@ -22,7 +22,8 @@
         "nw": "^0.35.5",
         "popper.mjs": "^1.14.7",
         "rxjs": "^6.4.0",
-        "rxjs-compat": "^6.4.0"
+        "rxjs-compat": "^6.4.0",
+        "vue": "^2.6.6"
     },
     "devDependencies": {
         "nw-builder": "^3.5.7"
