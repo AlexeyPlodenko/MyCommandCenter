@@ -2,7 +2,7 @@ import { ActionsRepository } from "../../../actions/ActionsRepository.mjs";
 import { AbstractPageComponent } from "../../AbstractPageComponent.mjs";
 import { App } from "../../../../app/App.mjs";
 import { MenuComponent } from "../../../../components/MenuComponent.mjs";
-import { SearchComponent } from "../../../../components/SearchComponent.mjs";
+import { SearchComponent } from "../../../../components/search/SearchComponent.mjs";
 import { ActionsComponent } from "../../../../components/actions/ActionsComponent.mjs";
 
 /**

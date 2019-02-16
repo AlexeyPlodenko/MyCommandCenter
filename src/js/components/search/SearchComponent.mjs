@@ -1,4 +1,4 @@
-import { AbstractComponent } from "./AbstractComponent.mjs";
+import { AbstractComponent } from "../AbstractComponent.mjs";
 
 /**
  * Search.
