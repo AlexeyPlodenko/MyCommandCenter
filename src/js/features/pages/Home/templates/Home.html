@@ -1,22 +1,22 @@
 <div class="page">
 
-    <app-actions inline-template>
-        <div class="actions">
-            <div class="search">
-                <input type="text" id="search_input" class="search_input" autocomplete="off" placeholder="Start typing to find the action...">
-            </div>
+    <div id="actions" class="actions">
+        <div class="search">
+            <input type="text" id="search_input" class="search_input" autocomplete="off" placeholder="Start typing to find the action...">
+        </div>
 
-            <div class="card">
-                <h5 class="card-header small">Featured</h5>
-                <div class="card-body">
-                    <div class="card action" style="width: 8rem;" v-for="action in actions">
+        <div class="card">
+            <h5 class="card-header small">Featured</h5>
+            <div class="card-body">
+                <template v-for="action in actions">
+                    <div class="card action" style="width: 8rem;">
                         <img class="card-img-top" src="https://scontent.fmla1-2.fna.fbcdn.net/v/t1.0-9/17992046_283665712077913_3617269335840491740_n.jpg?_nc_ht=scontent.fmla1-2.fna&oh=e6ed2d33c35f1835c4f6fed7d53f41a0&oe=5CBDAC48">
-                        <div class="card-body small p-1 action_name">nginx start.bat</div>
+                        <div class="card-body small p-1 action_name">{{ action.path }}</div>
                     </div>
-                </div>
+                </template>
             </div>
         </div>
-    </app-actions>
+    </div>
 
     <div class="menu" id="menu">
         <i class="menu_collapse fas fa-grip-lines-vertical"></i>

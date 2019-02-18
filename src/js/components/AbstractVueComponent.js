@@ -1,6 +1,6 @@
-import { Abstract } from "../helpers/Abstract.js";
 import { App } from "../app/App.js";
-import { Store } from "../helpers/Store.js";
+import { AbstractComponent } from "./AbstractComponent.js";
+import { log } from "../helpers/DevTools.js";
 
 /**
  * Component.
@@ -12,8 +12,9 @@ import { Store } from "../helpers/Store.js";
  *                              from memory once user will leave the page.
  *                              On come back the same component will be used.
  *                              Otherwise an new instance will be created.
+ * @property {Vue} _vueInst
  */
-export class AbstractComponent extends Abstract {
+export class AbstractVueComponent extends AbstractComponent {
     /**
      * Constructor.
      *
@@ -28,27 +29,29 @@ export class AbstractComponent extends Abstract {
             );
         }
 
-        if (typeof this.init !== 'function') {
-            throw new Error('Class must implement the method "init".');
-        }
+        // if (typeof this.init !== 'function') {
+        //     throw new Error('Class must implement the method "init".');
+        // }
 
         this._app = app;
-        this.reusable = true;
-        this.state = new Store();
-        this._parentComponent = null;
+        this._vueComponentParams = {};
+        this._vueInst = null;
     }
 
     /**
-     * @param {AbstractComponent} parentComponent
+     * @param {string} name
+     * @param {any} value
      */
-    setParentComponent(parentComponent) {
-        this._parentComponent = parentComponent;
+    setVueComponentParam(name, value) {
+        this._vueComponentParams[name] = value;
     }
 
-    /**
-     * @returns {AbstractComponent}
-     */
-    getParentComponent() {
-        return this._parentComponent;
+    init() {
+        this._vueInst = new Vue(this._vueComponentParams);
+log('AbstractVueComponent.init()', this._vueComponentParams, this._vueInst);
+    }
+
+    destroy() {
+        this._vueInst = null;
     }
 }

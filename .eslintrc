@@ -9,9 +9,5 @@
     "rules": {
         "semi": "error"
     },
-    "plugins": ["vue"],
-    "overrides": [
-        "plugin:vue/essential",
-        "prettier"
-    ]
+    "plugins": ["vue"]
 }

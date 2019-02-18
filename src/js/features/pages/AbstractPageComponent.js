@@ -1,5 +1,6 @@
 import { AbstractComponent } from "../../components/AbstractComponent.js";
 import { Store } from "../../helpers/Store.js";
+import { Abstract } from "../../helpers/Abstract.js";
 
 /**
  * Component.
@@ -36,9 +37,12 @@ export class AbstractPageComponent extends AbstractComponent {
      * Registers a component to do automatic maintenance.
      *
      * @param {string} name
-     * @param {AbstractComponent} componentInstance
+     * @param {function} component
      */
-    registerProvidedComponent(name, componentInstance) {
+    registerProvidedComponent(name, component) {
+        const componentInstance = new component(this._app);
+        componentInstance.setParentComponent(this);
+
         this._providedComponents[name] = componentInstance;
     }
 

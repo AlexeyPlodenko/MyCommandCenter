@@ -1,4 +1,5 @@
 import { AbstractRepository } from "../../repositories/AbstractRepository.js";
+import { ActionModel } from "./ActionModel.js";
 
 /**
  * @property {ActionModel[]} _actions

@@ -3,7 +3,8 @@ import { AbstractPageComponent } from "../../AbstractPageComponent.js";
 import { App } from "../../../../app/App.js";
 import { MenuComponent } from "../../../../components/MenuComponent.js";
 import { SearchComponent } from "../../../../components/search/SearchComponent.js";
-// import { ActionsComponent } from "../../../../components/actions/ActionsComponent.js";
+import { log } from "../../../../helpers/DevTools.js";
+import { ActionsComponent } from "../../../../components/actions/ActionsComponent.js";
 
 /**
  * HomePageComponent.
@@ -21,21 +22,21 @@ export class HomePageComponent extends AbstractPageComponent {
     constructor(app) {
         super(app);
 
+        this.actions = new ActionsRepository(app.storage);
+        this.actions.load();
+
         this.registerProvidedComponent(
             'menu',
-            new MenuComponent(this._app)
+            MenuComponent
         );
         this.registerProvidedComponent(
             'search',
-            new SearchComponent(this._app)
+            SearchComponent
         );
-        // this.registerProvidedComponent(
-        //     'actions',
-        //     new ActionsComponent(this._app)
-        // );
-
-        this.actions = new ActionsRepository(app.storage);
-        this.actions.load();
+        this.registerProvidedComponent(
+            'actions',
+            ActionsComponent
+        );
 
         // this.store.setStateItem('actions', this.actions.models);
     }

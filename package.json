@@ -12,6 +12,7 @@
         "@fortawesome/fontawesome-free": "^5.7.1",
         "bootstrap": "^4.2.1",
         "eslint": "^5.13.0",
+        "eslint-plugin-vue": "^5.2.1",
         "gulp": "^4.0.0",
         "gulp-sass": "^4.0.2",
         "gulp-uglify": "^3.0.1",
@@ -23,7 +24,8 @@
         "popper.js": "^1.14.7",
         "rxjs": "^6.4.0",
         "rxjs-compat": "^6.4.0",
-        "vue": "^2.6.6"
+        "vue": "^2.6.6",
+        "vue-rx": "^6.1.0"
     },
     "devDependencies": {
         "nw-builder": "^3.5.7"

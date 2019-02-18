@@ -1,5 +1,7 @@
 import { App } from "./app/App.js";
-import { logError } from "./helpers/DevTools.js";
+import { logError, log } from "./helpers/DevTools.js";
+
+const VueRx = require('vue-rx');
 
 /**
  * A bootstrap's error handling class.
@@ -144,9 +146,11 @@ window.onerror = function myErrorHandler(msg, url, lineNo, columnNo, error) {
     }
 })();
 
+Vue.use(VueRx);
+
 // run the app.
 try {
-    const app = new App();
+    window.app = new App();
 } catch (ex) {
     // handling errors from the App. itself
 
