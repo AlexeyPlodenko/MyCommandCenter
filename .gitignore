@@ -62,3 +62,6 @@ typings/
 
 /nbproject
 /build
+
+# VS Code IDE config.
+*.code-workspace
