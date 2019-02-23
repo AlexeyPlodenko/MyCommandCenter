@@ -24,7 +24,8 @@ export class Router {
         // remove trailing slash, just in case
         urlPath = urlPath.replace(/\/*$/, '');
 
-        // an empty path means a page not found, which should not be possible to call manually
+        // an empty path means a page not found,
+        // which should not be possible to call manually
         if (urlPath === '') {
             urlPath = '/';
         }

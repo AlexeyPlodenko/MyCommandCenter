@@ -1,5 +1,4 @@
 import { AbstractVueComponent } from "../AbstractVueComponent.js";
-import { log } from "../../helpers/DevTools.js";
 
 /**
  * Actions.
@@ -14,16 +13,14 @@ export class ActionsComponent extends AbstractVueComponent {
      */
     constructor(app) {
         super(app);
-
-        this.setVueComponentParam('el', '#actions');
-        // this.setVueComponentParam('props', ['actions']);
-        this.setVueComponentParam('subscriptions', function() {
-            return {
-                actions: this.getParentComponent().actions.models$
-                // this.getParentComponent().actions.models$
-            };
-        });
     }
 
-    init() {}
+    init() {
+        this.setVueComponentParam('el', '#actions');
+        this.setVueComponentParam('subscriptions', {
+            actions$: this.getParentComponent().actions.models$
+        });
+
+        super.init();
+    }
 }

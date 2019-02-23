@@ -48,7 +48,6 @@ export class AbstractVueComponent extends AbstractComponent {
 
     init() {
         this._vueInst = new Vue(this._vueComponentParams);
-log('AbstractVueComponent.init()', this._vueComponentParams, this._vueInst);
     }
 
     destroy() {

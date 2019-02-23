@@ -1,6 +1,7 @@
 import { Abstract } from "../helpers/Abstract.js";
 import { App } from "../app/App.js";
 import { Store } from "../helpers/Store.js";
+import { log } from "../helpers/DevTools.js";
 
 /**
  * Component.
