@@ -5,6 +5,7 @@ import { MenuComponent } from "../../../../components/MenuComponent.js";
 import { SearchComponent } from "../../../../components/search/SearchComponent.js";
 import { log } from "../../../../helpers/DevTools.js";
 import { ActionsComponent } from "../../../../components/actions/ActionsComponent.js";
+import { ActionService } from "../../../actions/ActionService.js";
 
 /**
  * HomePageComponent.
@@ -12,6 +13,7 @@ import { ActionsComponent } from "../../../../components/actions/ActionsComponen
  * @class
  * @property {SearchComponent} _search
  * @property {ActionsRepository} actions
+ * @property {ActionService} actionService
  */
 export class HomePageComponent extends AbstractPageComponent {
     /**
@@ -24,6 +26,8 @@ export class HomePageComponent extends AbstractPageComponent {
 
         this.actions = new ActionsRepository(app.storage);
         this.actions.load();
+
+        this.actionService = new ActionService();
 
         this.registerProvidedComponent(
             'menu',

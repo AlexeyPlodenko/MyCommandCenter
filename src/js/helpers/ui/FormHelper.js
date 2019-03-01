@@ -1,4 +1,5 @@
 import { Abstract } from "../Abstract.js";
+import { AppException } from "../../exceptions/AppException.js";
 
 /**
  * @class
@@ -35,7 +36,9 @@ export class FormHelper extends Abstract {
             const name = $node.prop('name');
 
             if (!name) {
-                throw new Error('Name property is missing in some elements.');
+                throw new AppException(
+                    'Name property is missing in some elements.'
+                );
             }
 
             if (name.slice(-2) === '[]') {

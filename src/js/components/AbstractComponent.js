@@ -2,6 +2,7 @@ import { Abstract } from "../helpers/Abstract.js";
 import { App } from "../app/App.js";
 import { Store } from "../helpers/Store.js";
 import { log } from "../helpers/DevTools.js";
+import { AppException } from "../exceptions/AppException.js";
 
 /**
  * Component.
@@ -24,17 +25,17 @@ export class AbstractComponent extends Abstract {
         super();
 
         if (new.target === AbstractComponent) {
-            throw new Error(
+            throw new AppException(
                 'Cannot construct AbstractComponent instances directly.'
             );
         }
 
         if (typeof this.init !== 'function') {
-            throw new Error('Class must implement the method "init".');
+            throw new AppException('Class must implement the method "init".');
         }
 
         this._app = app;
-        this.reusable = true;
+        this.reusable = false;
         this.state = new Store();
         this._parentComponent = null;
     }

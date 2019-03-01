@@ -154,9 +154,9 @@ try {
 } catch (ex) {
     // handling errors from the App. itself
 
-    // errors.add({
-    //     type: 'AppException',
-    //     exception: ex // @TOOD if use this way, need to store ex. properly
-    // });
-    logError('AppException', ex);
+    if (ex.isShowToUser !== 'undefined' && ex.isShowToUser()) {
+        alert(ex.getMessage());
+    } else {
+        logError('AppException', ex);
+    }
 }

@@ -1,4 +1,5 @@
 import { Abstract } from '../Abstract.js';
+import { AppException } from '../../exceptions/AppException.js';
 
 const BehaviorSubject = require('rxjs/BehaviorSubject').BehaviorSubject;
 
@@ -18,16 +19,20 @@ export class AbstractClient extends Abstract {
         super();
 
         if (new.target === AbstractClient) {
-            throw new Error(
+            throw new AppException(
                 'Cannot construct AbstractClient instances directly.'
             );
         }
 
         if (typeof this.getPath !== 'function') {
-            throw new Error('Class must implement the method "getPath".');
+            throw new AppException(
+                'Class must implement the method "getPath".'
+            );
         }
         if (typeof this.redirect !== 'function') {
-            throw new Error('Class must implement the method "redirect".');
+            throw new AppException(
+                'Class must implement the method "redirect".'
+            );
         }
 
         this.path$ = new BehaviorSubject('');

@@ -1,9 +1,10 @@
 import { Abstract } from "../helpers/Abstract.js";
 import { AbstractDataProvider } from "../helpers/data_providers/AbstractDataProvider.js";
 import { AbstractModel } from "../models/AbstractModel.js";
-import { logError } from "../helpers/DevTools.js";
+import { logError, log } from "../helpers/DevTools.js";
 import { ActionModel } from "../features/actions/ActionModel.js";
 import { dataMapper } from "../dataMapper.js";
+import { AppException } from "../exceptions/AppException.js";
 
 const BehaviorSubject = require('rxjs/BehaviorSubject').BehaviorSubject;
 
@@ -13,6 +14,7 @@ const BehaviorSubject = require('rxjs/BehaviorSubject').BehaviorSubject;
  * @class
  * @property {AbstractDataProvider} _storage
  * @property {AbstractModel[]} _models
+ * @property {BehaviorSubject} models$
  */
 export class AbstractRepository extends Abstract {
     /**
@@ -24,13 +26,13 @@ export class AbstractRepository extends Abstract {
         super();
 
         if (new.target === AbstractRepository) {
-            throw new Error(
+            throw new AppException(
                 'Cannot construct AbstractRepository instances directly.'
             );
         }
 
         if (typeof this._getModel !== 'function') {
-            throw new Error(
+            throw new AppException(
                 'Class must implement the method "_getModel", which must '+
                 'return a model used for this repository.'
             );
@@ -64,8 +66,8 @@ export class AbstractRepository extends Abstract {
      * @param {number} index
      */
     remove(index) {
-        const models = this._models.slice(index, 1);
-        this._setModels(models);
+        this._models.splice(index, 1);
+        this._setModels(this._models);
     }
 
     /**

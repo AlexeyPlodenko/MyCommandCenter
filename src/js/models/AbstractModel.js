@@ -16,7 +16,7 @@ export class AbstractModel extends Abstract {
         super();
 
         if (new.target === AbstractModel) {
-            throw new Error(
+            throw new AppException(
                 'Cannot construct AbstractModel instances directly.'
             );
         }
@@ -28,7 +28,9 @@ export class AbstractModel extends Abstract {
         //     && window[className].hasOwnProperty('isDataValid')) {
             // check that static method isDataValid is implemented
 
-            // throw new Error('Class must implement the method "isDataValid".');
+            // throw new AppException(
+                // 'Class must implement the method "isDataValid".'
+                // );
         // }
 
         this._data = {};

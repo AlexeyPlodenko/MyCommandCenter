@@ -1,3 +1,5 @@
+import { AppException } from "../exceptions/AppException.js";
+
 /**
  * Abstract.
  *
@@ -9,7 +11,9 @@ export class Abstract {
      */
     constructor() {
         if (new.target === Abstract) {
-            throw new Error('Cannot construct Abstract instances directly.');
+            throw new AppException(
+                'Cannot construct Abstract instances directly.'
+            );
         }
     }
 }

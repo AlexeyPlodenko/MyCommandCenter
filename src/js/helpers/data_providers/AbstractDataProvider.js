@@ -1,4 +1,5 @@
 import { Abstract } from "../Abstract.js";
+import { AppException } from "../../exceptions/AppException.js";
 
 /**
  * @class
@@ -14,19 +15,19 @@ export class AbstractDataProvider extends Abstract {
         super();
 
         if (new.target === AbstractDataProvider) {
-            throw new Error(
+            throw new AppException(
                 'Cannot construct AbstractDataProvider instances directly.'
             );
         }
 
         if (typeof this.get !== 'function') {
-            throw new Error('Class must implement the method "get".');
+            throw new AppException('Class must implement the method "get".');
         }
         if (typeof this.set !== 'function') {
-            throw new Error('Class must implement the method "set".');
+            throw new AppException('Class must implement the method "set".');
         }
         if (typeof this.remove !== 'function') {
-            throw new Error('Class must implement the method "remove".');
+            throw new AppException('Class must implement the method "remove".');
         }
     }
 }

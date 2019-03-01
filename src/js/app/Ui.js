@@ -1,6 +1,9 @@
 import { Abstract } from '../helpers/Abstract.js';
 import { App } from './App.js';
 import { AbstractPageComponent } from '../features/pages/AbstractPageComponent.js';
+import { ModalComponent } from '../components/modal/ModalComponent.js';
+import { log } from '../helpers/DevTools.js';
+import { AppException } from '../exceptions/AppException.js';
 
 const JsRender = require('jsrender/jsrender-node');
 
@@ -10,6 +13,7 @@ const JsRender = require('jsrender/jsrender-node');
  * @class
  * @property {App} _app
  * @property {JQuery} $body
+ * @property {JQuery} $page
  * @property {AbstractPageComponent} _currentPageComponent
  *
  */
@@ -24,6 +28,7 @@ export class Ui extends Abstract {
 
         this._app = app;
         this.$body = $('body');
+        this.$page = $('#page');
     }
 
     /**
@@ -74,10 +79,10 @@ export class Ui extends Abstract {
 
         const $compNode = $(html);
 
-        this.$body.empty();
-        this.$body.append($compNode);
+        this.$page.empty();
+        this.$page.append($compNode);
 
-        this.$body.html(html);
+        this.$page.html(html);
     }
 
     /**
@@ -120,6 +125,31 @@ export class Ui extends Abstract {
      */
     getCurrentPageComponent() {
         return this._currentPageComponent;
+    }
+
+    /**
+     * @returns {ModalComponent}
+     */
+    showModal(title, text) {
+        const modalComp = this._getModalComponent();
+        modalComp.data.title = title;
+        modalComp.data.text = text;
+        modalComp.data.accept = 'Yes';
+        modalComp.data.cancel = 'No';
+        modalComp.show();
+        return modalComp;
+    }
+
+    /**
+     * @returns {ModalComponent}
+     */
+    _getModalComponent() {
+        if (this._modalComponent === undefined) {
+            this._modalComponent = new ModalComponent(this._app, 'mainModal');
+            this._modalComponent.init();
+        }
+
+        return this._modalComponent;
     }
 
     /**
@@ -166,10 +196,10 @@ export class Ui extends Abstract {
             } else if (selector instanceof jQuery) {
                 $selector = selector;
             } else {
-                throw new Error('Unsupported type of selector supplied.');
+                throw new AppException('Unsupported type of selector supplied.');
             }
         } else {
-            throw new Error('Unsupported type of selector supplied.');
+            throw new AppException('Unsupported type of selector supplied.');
         }
 
         return $selector;

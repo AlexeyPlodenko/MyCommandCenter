@@ -16,6 +16,7 @@ export class ActionModel extends AbstractModel {
     constructor(data) {
         super(data);
 
+        this._data.name = '';
         this._data.path = '';
         this._data.arguments = [];
 
@@ -32,6 +33,27 @@ export class ActionModel extends AbstractModel {
      */
     static isDataValid(data) {
         return false;
+    }
+
+    /**
+     * @returns {string}
+     */
+    getName() {
+        return this._data.name || this._data.path.split(/[\\\/]/).pop();
+    }
+
+    /**
+     * @returns {string}
+     */
+    get name() {
+        return this._data.name;
+    }
+
+    /**
+     * @param {string} value
+     */
+    set name(value) {
+        this._data.name = value;
     }
 
     /**

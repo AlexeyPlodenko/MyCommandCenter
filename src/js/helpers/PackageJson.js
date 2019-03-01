@@ -1,3 +1,5 @@
+import { AppException } from '../exceptions/AppException.js';
+
 const Fs = require('fs'),
       Path = require('path');
 
@@ -52,7 +54,7 @@ export class PackageJson {
         const packagePath = Path.join(baseDir, '/package.json');
 
         if (!Fs.existsSync(packagePath)) {
-            throw new Error('File /package.json does not exist.');
+            throw new AppException('File /package.json does not exist.');
         }
 
         const packageJson = Fs.readFileSync(packagePath, 'utf8');

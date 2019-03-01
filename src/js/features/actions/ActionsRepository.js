@@ -1,5 +1,6 @@
 import { AbstractRepository } from "../../repositories/AbstractRepository.js";
 import { ActionModel } from "./ActionModel.js";
+import { AppException } from "../../exceptions/AppException.js";
 
 /**
  * @property {ActionModel[]} _actions
@@ -19,7 +20,7 @@ export class ActionsRepository extends AbstractRepository {
      */
     addActionModel(action) {
         if (typeof action !== 'object' || !(action instanceof ActionModel)) {
-            throw new Error('Action must be an instance of ActionModel.');
+            throw new AppException('Action must be an instance of ActionModel.');
         }
 
         super.add(action);

@@ -1,4 +1,5 @@
 import { Abstract } from "../helpers/Abstract.js";
+import { AppException } from "../exceptions/AppException.js";
 
 export class AbstractFactory extends Abstract {
     /**
@@ -8,7 +9,7 @@ export class AbstractFactory extends Abstract {
         super();
 
         if (new.target === AbstractFactory) {
-            throw new Error(
+            throw new AppException(
                 'Cannot construct AbstractFactory instances directly.'
             );
         }

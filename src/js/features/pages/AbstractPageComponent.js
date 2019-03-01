@@ -1,6 +1,7 @@
 import { AbstractComponent } from "../../components/AbstractComponent.js";
 import { Store } from "../../helpers/Store.js";
 import { Abstract } from "../../helpers/Abstract.js";
+import { AppException } from "../../exceptions/AppException.js";
 
 /**
  * Component.
@@ -20,17 +21,12 @@ export class AbstractPageComponent extends AbstractComponent {
         super(app);
 
         if (new.target === AbstractPageComponent) {
-            throw new Error(
+            throw new AppException(
                 'Cannot construct AbstractPageComponent instances directly.'
             );
         }
 
-        // if (typeof this.storeUpdated !== 'function') {
-        //     throw new Error('Class must implement the method "storeUpdated".');
-        // }
-
         this._providedComponents = {};
-        // this.store = new Store();
     }
 
     /**

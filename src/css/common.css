@@ -3,7 +3,7 @@
     outline: none;
     user-select: none;
 }
-html, body {
+html, body, .page {
     height: 100%;
     margin: 0;
 }
@@ -46,6 +46,15 @@ body, table, input, textarea {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     max-height: 47px;
+}
+.action_close_icon {
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    display: none;
+}
+.action:hover .action_close_icon {
+    display: block;
 }
 
 .menu {
