@@ -1,11 +1,11 @@
 import { ActionsRepository } from "../../../actions/ActionsRepository.js";
 import { AbstractPageComponent } from "../../AbstractPageComponent.js";
 import { App } from "../../../../app/App.js";
-import { MenuComponent } from "../../../../components/MenuComponent.js";
 import { SearchComponent } from "../../../../components/search/SearchComponent.js";
 import { log } from "../../../../helpers/DevTools.js";
 import { ActionsComponent } from "../../../../components/actions/ActionsComponent.js";
 import { ActionService } from "../../../actions/ActionService.js";
+import { MenuComponent } from "../../../../components/menu/MenuComponent.js";
 
 /**
  * HomePageComponent.
@@ -41,8 +41,6 @@ export class HomePageComponent extends AbstractPageComponent {
             'actions',
             ActionsComponent
         );
-
-        // this.store.setStateItem('actions', this.actions.models);
     }
 
     /**
@@ -51,8 +49,4 @@ export class HomePageComponent extends AbstractPageComponent {
     init() {
         $('[data-toggle="tooltip"]').tooltip();
     }
-
-    // storeUpdated(state) {
-    //     console.log('storeUpdated', state);
-    // }
 }
