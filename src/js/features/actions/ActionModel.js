@@ -1,5 +1,7 @@
 import { AbstractModel } from "../../models/AbstractModel.js";
-import { VariableHelper } from "../../helpers/VariableHelper.js";
+import { ActionTypes } from "./ActionTypes.js";
+import { log } from "../../helpers/DevTools.js";
+import { Variable } from "../../helpers/Variable.js";
 
 /**
  * @class
@@ -18,10 +20,11 @@ export class ActionModel extends AbstractModel {
 
         this._data.name = '';
         this._data.path = '';
+        this._data.type = undefined;
         this._data.arguments = [];
 
         // @TODO find a better way to set the initial model data
-        if (!VariableHelper.isEmpty(data)) {
+        if (!Variable.isEmpty(data)) {
             this.setData(data);
         }
     }

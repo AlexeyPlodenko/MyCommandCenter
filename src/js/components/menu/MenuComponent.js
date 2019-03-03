@@ -2,11 +2,15 @@ import { AbstractVueComponent } from "../AbstractVueComponent.js";
 import { log } from "../../helpers/DevTools.js";
 import { ActionModel } from "../../features/actions/ActionModel.js";
 import { DynamicInputComponent } from "../dynamic_input/DynamicInputComponent.js";
+import { FormHelper } from "../../helpers/ui/FormHelper.js";
+import { ActionTypes } from "../../features/actions/ActionTypes.js";
+import { Variable } from "../../helpers/Variable.js";
 
 /**
  * Actions.
  *
  * @class
+ * @property {Map} items
  * @property {ActionsRepository} _actions
  */
 export class MenuComponent extends AbstractVueComponent {
@@ -25,21 +29,12 @@ export class MenuComponent extends AbstractVueComponent {
             needsFocus: false,
             focusOnOpen: false
         });
-        this.items.set('menu_add_app', {
-            open: false,
-            needsFocus: true,
-            focusOnOpen: '#menu_add_app_file'
-        });
-        this.items.set('menu_add_cli_comm', {
-            open: false,
-            needsFocus: true,
-            focusOnOpen: false
-        });
-        this.items.set('menu_add_web_link', {
-            open: false,
-            needsFocus: true,
-            focusOnOpen: false
-        });
+
+        for (const key in ActionTypes) {
+            const actionType = ActionTypes[key];
+            this.items.set('menu_add_'+ actionType.uid, actionType.ui);
+        };
+
         this.items.set('menu_add_category', {
             open: false,
             needsFocus: true,
@@ -50,7 +45,7 @@ export class MenuComponent extends AbstractVueComponent {
     }
 
     /**
-     *
+     * init
      */
     init() {
         this._actions = this.getParentComponent().actions;
@@ -71,9 +66,9 @@ export class MenuComponent extends AbstractVueComponent {
             <li class="menu_item nav-item">
                 <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add</a>
                 <div class="dropdown-menu" id="menu_add">
-                    <a class="dropdown-item" href="" data-show-menu-item="menu_add_app" data-toggle="tooltip" data-placement="left" title="Any type of file. A proper application will run to handle it.">File</a>
-                    <a class="dropdown-item" href="" data-show-menu-item="menu_add_cli_comm">CLI command</a>
-                    <a class="dropdown-item" href="" data-show-menu-item="menu_add_web_link">Web link</a>
+                    <a class="dropdown-item" href="" data-show-menu-item="menu_add_${ActionTypes.FILE.uid}" data-toggle="tooltip" data-placement="left" title="Any type of file. A proper application will run to handle it.">File</a>
+                    <a class="dropdown-item" href="" data-show-menu-item="menu_add_${ActionTypes.CLI.uid}">CLI command</a>
+                    <a class="dropdown-item" href="" data-show-menu-item="menu_add_${ActionTypes.WEB.uid}">Web link</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="" data-show-menu-item="menu_add_category">Category</a>
                 </div>
@@ -87,7 +82,7 @@ export class MenuComponent extends AbstractVueComponent {
         </ul>
     </div>
 
-    <div id="menu_add_app">
+    <div id="menu_add_${ActionTypes.FILE.uid}">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb small">
                 <li class="breadcrumb-item"><a href="" data-show-menu-item="menu_home">Menu</a></li>
@@ -97,8 +92,8 @@ export class MenuComponent extends AbstractVueComponent {
         <form>
             <div class="form-group">
                 <div class="col">
-                    <label for="menu_add_app_file">Choose a file</label>
-                    <input type="file" class="form-control-file" name="path" id="menu_add_app_file" required="required">
+                    <label for="menu_add_${ActionTypes.FILE.uid}_file">Choose a file</label>
+                    <input type="file" class="form-control-file" name="path" id="menu_add_${ActionTypes.FILE.uid}_file" required="required">
                     <small class="form-text text-muted">Choose any type of file. A proper application will run to handle it, if file is not of an executable type.</small>
                 </div>
             </div>
@@ -125,7 +120,7 @@ export class MenuComponent extends AbstractVueComponent {
         </form>
     </div>
 
-    <div id="menu_add_cli_comm">
+    <div id="menu_add_${ActionTypes.CLI.uid}">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb small">
                 <li class="breadcrumb-item"><a href="" data-show-menu-item="menu_home">Menu</a></li>
@@ -150,7 +145,7 @@ export class MenuComponent extends AbstractVueComponent {
         </form>
     </div>
 
-    <div id="menu_add_web_link">
+    <div id="menu_add_${ActionTypes.WEB.uid}">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb small">
                 <li class="breadcrumb-item"><a href="" data-show-menu-item="menu_home">Menu</a></li>
@@ -172,7 +167,7 @@ export class MenuComponent extends AbstractVueComponent {
         );
         this.setVueParam('el', 'menu');
 
-        this.setVueParam('mounted', () => {this.afterMount();});
+        this.setVueParam('mounted', this.afterMount.bind(this));
 
         super.init();
     }
@@ -193,15 +188,15 @@ export class MenuComponent extends AbstractVueComponent {
             return false;
         });
 
-        $menu.find('#menu_add_app form').submit((ev) => {
+        $menu.find('#menu_add_'+ ActionTypes.FILE.uid +' form').submit((ev) => {
             const $this = $(ev.target);
             const $elements = FormHelper.getEditableElements($this);
             const data = FormHelper.getValues($elements);
 
             // remove empty arguments
-            if (VariableHelper.hasKey(data, 'arguments')
-                && VariableHelper.isArray(data.arguments)
-                && !VariableHelper.isEmpty(data.arguments)) {
+            if (Variable.hasKey(data, 'arguments')
+                && Variable.isArray(data.arguments)
+                && !Variable.isEmpty(data.arguments)) {
 
                 // trim each argument
                 data.arguments.forEach(arg => {
@@ -218,7 +213,6 @@ export class MenuComponent extends AbstractVueComponent {
             const homePage = this._app.ui.getCurrentPageComponent();
             homePage.actions.addActionModel(action);
 
-log('data', action);
             return false;
         });
 

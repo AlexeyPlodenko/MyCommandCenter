@@ -1,6 +1,6 @@
 import { Abstract } from "../helpers/Abstract.js";
-import { VariableHelper } from "../helpers/VariableHelper.js";
 import { AppException } from "../exceptions/AppException.js";
+import { Variable } from "../helpers/Variable.js";
 
 /**
  * @class
@@ -59,7 +59,7 @@ export class AbstractModel extends Abstract {
             // iterate over the data set and assign the value
 
             if (key in this._data) {
-                if (emptyValuesAllowed || !VariableHelper.isEmpty(data[key])) {
+                if (emptyValuesAllowed || !Variable.isEmpty(data[key])) {
                     // store only if empty values are allowed or not empty
                     this._data[key] = data[key];
                 }
