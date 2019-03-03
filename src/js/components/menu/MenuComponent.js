@@ -90,6 +90,7 @@ export class MenuComponent extends AbstractVueComponent {
             </ol>
         </nav>
         <form>
+            <input type="hidden" name="type" value="FILE">
             <div class="form-group">
                 <div class="col">
                     <label for="menu_add_${ActionTypes.FILE.uid}_file">Choose a file</label>
@@ -128,6 +129,7 @@ export class MenuComponent extends AbstractVueComponent {
             </ol>
         </nav>
         <form>
+            <input type="hidden" name="type" value="CLI">
             <div class="form-group">
                 <div class="col">
                     <label>Command</label>

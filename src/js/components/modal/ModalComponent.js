@@ -33,7 +33,7 @@ export class ModalComponent extends AbstractVueComponent {
     }
 
     /**
-     *
+     * init.
      */
     init() {
         this.setVueParam(
@@ -62,10 +62,6 @@ export class ModalComponent extends AbstractVueComponent {
         this.setVueParam('data', () => {
             return this.data;
         });
-        // this.setVueParam('mounted', () => {
-        //     $(document).on('keypress', function (event) {
-        //       });
-        // });
 
         super.init();
     }
