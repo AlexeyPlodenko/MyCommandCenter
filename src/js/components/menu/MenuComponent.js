@@ -189,31 +189,29 @@ export class MenuComponent extends AbstractVueComponent {
         });
 
         $menu.find('#menu_add_'+ ActionTypes.FILE.uid +' form').submit((ev) => {
-            const $this = $(ev.target);
-            const $elements = FormHelper.getEditableElements($this);
-            const data = FormHelper.getValues($elements);
+            this._createAction(ev, data => {
+                // remove empty arguments
+                if (Variable.hasKey(data, 'arguments')
+                    && Variable.isArray(data.arguments)
+                    && !Variable.isEmpty(data.arguments)) {
 
-            // remove empty arguments
-            if (Variable.hasKey(data, 'arguments')
-                && Variable.isArray(data.arguments)
-                && !Variable.isEmpty(data.arguments)) {
+                    // trim each argument
+                    data.arguments.forEach(arg => {
+                        arg = arg.trim();
+                    });
 
-                // trim each argument
-                data.arguments.forEach(arg => {
-                    arg = arg.trim();
-                });
+                    // and remove empty ones
+                    data.arguments = data.arguments.filter(
+                                                        arg => arg.length > 0
+                                                    );
+                }
 
-                // and remove empty ones
-                data.arguments = data.arguments.filter(arg => arg.length > 0);
-            }
+                return data;
+            });
+        });
 
-            const action = ActionModel.createFromData(data);
-
-            /** @type {HomePageComponent} */
-            const homePage = this._app.ui.getCurrentPageComponent();
-            homePage.actions.addActionModel(action);
-
-            return false;
+        $menu.find('#menu_add_'+ ActionTypes.CLI.uid +' form').submit((ev) => {
+            this._createAction(ev, data => data);
         });
 
         for (const [itemId, item] of this.items) {
@@ -233,6 +231,34 @@ export class MenuComponent extends AbstractVueComponent {
 
         this._menuAddFileArguments = new DynamicInputComponent($menu);
         this._menuAddFileArguments.init();
+    }
+
+    /**
+     *
+     * @param {object} ev
+     * @param {function} prepareDataBeforeCreateFn
+     */
+    _createAction(ev, prepareDataBeforeCreateFn) {
+        const $this = $(ev.target);
+        const $elements = FormHelper.getEditableElements($this);
+        let data = FormHelper.getValues($elements);
+
+        // trim elements
+        for (const key in data) {
+            if (Variable.isOfType(data[key], 'string')) {
+                data[key] = data[key].trim();
+            }
+        }
+
+        data = (prepareDataBeforeCreateFn)(data);
+
+        const action = ActionModel.createFromData(data);
+
+        /** @type {HomePageComponent} */
+        const homePage = this._app.ui.getCurrentPageComponent();
+        homePage.actions.addActionModel(action);
+
+        return false;
     }
 
     /**

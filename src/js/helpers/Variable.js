@@ -31,4 +31,29 @@ export class Variable extends Abstract {
     static hasKey(data, key) {
         return data.hasOwnProperty(key);
     }
+
+    /**
+     * Check if data is of a scalar type.
+     *
+     * @param {any} data
+     */
+    static isScalar(data) {
+        const dataType = typeof data;
+        return dataType === 'string'
+            || dataType === 'number'
+            || dataType === 'boolean'
+            || dataType === 'undefined'
+            || dataType === 'null'
+            || dataType === 'symbol';
+    }
+
+    /**
+     * Checks the data type.
+     *
+     * @param {any} data
+     * @param {string} type
+     */
+    static isOfType(data, type) {
+        return typeof data === type;
+    }
 }

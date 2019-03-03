@@ -39,7 +39,7 @@ export class ModalComponent extends AbstractVueComponent {
         this.setVueParam(
             'template',
             `
-            <div class="modal fade" :id="id" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="false">
+            <div class="modal fade" :id="id" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="false" @keypress="keyPressed">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -51,7 +51,7 @@ export class ModalComponent extends AbstractVueComponent {
                         <div class="modal-body" v-if="text">{{ text }}</div>
                         <div class="modal-footer">
                             <button v-if="cancel" type="button" class="btn btn-secondary" data-dismiss="modal">{{ cancel }}</button>
-                            <button v-if="accept" type="button" class="btn btn-primary" @click="_accepted();">{{ accept }}</button>
+                            <button v-if="accept" type="button" class="btn btn-primary" @click="accepted();">{{ accept }}</button>
                         </div>
                     </div>
                 </div>
@@ -62,6 +62,10 @@ export class ModalComponent extends AbstractVueComponent {
         this.setVueParam('data', () => {
             return this.data;
         });
+        // this.setVueParam('mounted', () => {
+        //     $(document).on('keypress', function (event) {
+        //       });
+        // });
 
         super.init();
     }
@@ -90,9 +94,18 @@ export class ModalComponent extends AbstractVueComponent {
     }
 
     /**
+     * Handling of key press events.
+     */
+    keyPressed(ev) {
+        if (ev.key === 'Enter') {
+            this.accepted();
+        }
+    }
+
+    /**
      * Called if ACCEPT button is clicked in modal.
      */
-    _accepted() {
+    accepted() {
         if (typeof this._onAccept === 'function') {
             (this._onAccept)();
         }
