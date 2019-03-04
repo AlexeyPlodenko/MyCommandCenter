@@ -8,7 +8,7 @@ import { AppException } from "../exceptions/AppException.js";
  * Component.
  *
  * @class
- * @abstract onInit
+ * @abstract init
  * @property {App} _app
  * @property {boolean} reusable If true, the component would not be removed
  *                              from memory once user will leave the page.

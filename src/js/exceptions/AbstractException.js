@@ -7,8 +7,8 @@ export class AbstractException extends Error {
     /**
      * Constructor.
      */
-    constructor() {
-        super();
+    constructor(msg) {
+        super(msg);
 
         if (new.target === AbstractException) {
             throw new Error(

@@ -7,8 +7,8 @@ export class UserException extends AbstractException {
     /**
      * Constructor
      */
-    constructor() {
-        super();
+    constructor(msg) {
+        super(msg);
 
         this._showToUser = true;
     }

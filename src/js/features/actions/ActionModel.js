@@ -74,6 +74,20 @@ export class ActionModel extends AbstractModel {
     }
 
     /**
+     * @returns {string}
+     */
+    get type() {
+        return this._data.type;
+    }
+
+    /**
+     * @param {string} value
+     */
+    set type(value) {
+        this._data.type = value;
+    }
+
+    /**
      * @returns {string[]}
      */
     get arguments() {

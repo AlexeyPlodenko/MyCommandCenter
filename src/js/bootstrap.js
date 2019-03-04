@@ -106,6 +106,16 @@ window.onerror = function myErrorHandler(msg, url, lineNo, columnNo, error) {
     return false;
 };
 
+// handling Vue errors
+Vue.config.errorHandler = function (err) {
+    logError(err);
+
+    errors.add({
+        type: 'VueException',
+        err: err
+    });
+};
+
 // show the errors from the last run time
 (function() {
     const errorList = errors.getAll();

@@ -27,7 +27,7 @@ export class HomePageComponent extends AbstractPageComponent {
         this.actions = new ActionsRepository(app.storage);
         this.actions.load();
 
-        this.actionService = new ActionService();
+        this.actionService = new ActionService(app);
 
         this.registerProvidedComponent(
             'menu',

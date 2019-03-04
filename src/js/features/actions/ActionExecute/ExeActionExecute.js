@@ -1,27 +1,29 @@
 import { AbstractActionExecute } from "./AbstractActionExecute.js";
 import { log } from "../../../helpers/DevTools.js";
 
-const Exec = require('child_process').execFile;
+const exec = require('child_process').execFile;
 
 export class ExeActionExecute extends AbstractActionExecute {
     /**
      * @returns {string[]}
      */
     getExtensions() {
-        return ['exe'];
+        return ['exe', 'bat'];
     }
 
     /**
      * @param {ActionModel} action
      */
     execute(action) {
-        //https://stackoverflow.com/questions/19762350/execute-an-exe-file-using-node-js
-        //https://github.com/nwjs/nw.js/issues/2283
-        // log('execute', action);
-
-        Exec(action.path, action.arguments, function(err, data) {
-            log(err);
-            log(data.toString());
+        exec(action.path, action.arguments, (err, data) => {
+            if (err) {
+                this._app.ui.showNotificationModal('Error', err);
+            } else {
+                this._app.ui.showNotificationModal(
+                    'The app. is running',
+                    data.toString()
+                );
+            }
         });
     }
 }

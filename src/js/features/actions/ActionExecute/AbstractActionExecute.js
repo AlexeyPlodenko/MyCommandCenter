@@ -1,12 +1,17 @@
 import { Abstract } from "../../../helpers/Abstract.js";
 import { AppException } from "../../../exceptions/AppException.js";
+import { Variable } from "../../../helpers/Variable.js";
 
 export class AbstractActionExecute extends Abstract {
     /**
      * Constructor.
+     *
+     * @param {App} app
      */
-    constructor() {
+    constructor(app) {
         super();
+
+        this._app = app;
 
         if (new.target === AbstractActionExecute) {
             throw new AppException(
@@ -27,10 +32,9 @@ export class AbstractActionExecute extends Abstract {
         }
 
         const exts = this.getExtensions();
-        if (typeof exts !== 'object'
-            || !(exts instanceof Array)
-            || exts.length === 0)
-        {
+        if (!Variable.isArray(exts)
+            || exts.length === 0) {
+
             throw new AppException(
                 'The method "getExtensions" must return an array of extensions.'
             );

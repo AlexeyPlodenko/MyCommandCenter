@@ -9,7 +9,22 @@ const actionExecClasses = [
     ExeActionExecute
 ];
 
+/**
+ * @class
+ * @property {App} _app
+ */
 export class ActionService extends Abstract {
+    /**
+     * Constructor.
+     *
+     * @param {App} app
+     */
+    constructor(app) {
+        super();
+
+        this._app = app;
+    }
+
     /**
      * @param {ActionModel} action
      */
@@ -32,7 +47,7 @@ export class ActionService extends Abstract {
         }
 
         if (this._actionExecutors[ext] === undefined) {
-            throw new UserException(`Extension ${ext} is not supported yet.`);
+            throw new UserException(`Extension .${ext} is not supported yet.`);
         }
 
         const actionExecName = this._actionExecutors[ext];
@@ -40,6 +55,9 @@ export class ActionService extends Abstract {
         return this._actionExecutorRegistry[actionExecName];
     }
 
+    /**
+     * _initExtMap
+     */
     _initExtMap() {
         this._actionExecutorRegistry = {};
         this._actionExecutors = {};
@@ -48,7 +66,7 @@ export class ActionService extends Abstract {
         actionExecClasses.forEach(execClass => {
             const execClassName = execClass.name;
             if (actExecReg[execClassName] === undefined) {
-                actExecReg[execClassName] = new execClass();
+                actExecReg[execClassName] = new execClass(this._app);
             }
 
             const exts = actExecReg[execClassName].getExtensions();

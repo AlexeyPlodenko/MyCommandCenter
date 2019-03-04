@@ -130,12 +130,25 @@ export class Ui extends Abstract {
     /**
      * @returns {ModalComponent}
      */
-    showModal(title, text) {
+    showConfirmationModal(title, text) {
         const modalComp = this._getModalComponent();
         modalComp.data.title = title;
         modalComp.data.text = text;
         modalComp.data.accept = 'Yes';
         modalComp.data.cancel = 'No';
+        modalComp.show();
+        return modalComp;
+    }
+
+    /**
+     * @returns {ModalComponent}
+     */
+    showNotificationModal(title, text) {
+        const modalComp = this._getModalComponent();
+        modalComp.data.title = title;
+        modalComp.data.text = text;
+        modalComp.data.accept = 'OK';
+        modalComp.data.cancel = '';
         modalComp.show();
         return modalComp;
     }

@@ -1,13 +1,10 @@
 import { AbstractComponent } from "../../components/AbstractComponent.js";
-import { Store } from "../../helpers/Store.js";
-import { Abstract } from "../../helpers/Abstract.js";
 import { AppException } from "../../exceptions/AppException.js";
 
 /**
- * Component.
+ * AbstractPageComponent.
  *
  * @class
- * @abstract onInit
  * @property {MenuComponent} _menu
  * @property {AbstractComponent[]} _providedComponents
  */

@@ -29,7 +29,7 @@ export class ActionsComponent extends AbstractVueComponent {
                         <template v-for="(action, ix) in actions$">
                             <div class="card action" style="width: 8rem;" @click.stop="runAction(ix);">
                                 <span class="clickable close-icon action_close_icon" data-effect="fadeOut" @click.stop="removeAction(ix);"><i class="fa fa-times-circle"></i></span>
-                                <img class="card-img-top" src="https://scontent.fmla1-2.fna.fbcdn.net/v/t1.0-9/17992046_283665712077913_3617269335840491740_n.jpg?_nc_ht=scontent.fmla1-2.fna&oh=e6ed2d33c35f1835c4f6fed7d53f41a0&oe=5CBDAC48">
+                                <img class="card-img-top" src="https://scontent.fmla1-1.fna.fbcdn.net/v/t31.0-8/322310_240368599342071_2554949_o.jpg?_nc_cat=109&_nc_ht=scontent.fmla1-1.fna&oh=66302d3c034dd1cfc7e4e42afbe1a3e6&oe=5CE4D2C2">
                                 <div class="card-body small p-1 action_name">{{ action.getName() }}</div>
                             </div>
                         </template>
@@ -51,7 +51,7 @@ export class ActionsComponent extends AbstractVueComponent {
     runAction(actionId) {
         const action = this._actions.get(actionId);
         if (action === undefined) {
-            throw AppException(
+            throw new AppException(
                 'Failed to find action with this ID in registry.'
             );
         }
@@ -64,12 +64,12 @@ export class ActionsComponent extends AbstractVueComponent {
     removeAction(actionId) {
         const action = this._actions.get(actionId);
         if (action === undefined) {
-            throw AppException(
+            throw new AppException(
                 'Failed to find action with this ID in registry.'
             );
         }
 
-        const modal = this._app.ui.showModal(
+        const modal = this._app.ui.showConfirmationModal(
             'Confirmation',
             'Are you sure you want to remove this action?'
         );
