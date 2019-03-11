@@ -4,8 +4,8 @@ import { App } from "../../../../app/App.js";
 import { SearchComponent } from "../../../../components/search/SearchComponent.js";
 import { log } from "../../../../helpers/DevTools.js";
 import { ActionsComponent } from "../../../../components/actions/ActionsComponent.js";
-import { ActionService } from "../../../actions/ActionService.js";
 import { MenuComponent } from "../../../../components/menu/MenuComponent.js";
+import { ActionExecuteCommandFactory } from "../../../actions/ActionExecuteCommandFactory.js";
 
 /**
  * HomePageComponent.
@@ -13,7 +13,7 @@ import { MenuComponent } from "../../../../components/menu/MenuComponent.js";
  * @class
  * @property {SearchComponent} _search
  * @property {ActionsRepository} actions
- * @property {ActionService} actionService
+ * @property {ActionExecuteCommandFactory} actionExecuteCommandFactory
  */
 export class HomePageComponent extends AbstractPageComponent {
     /**
@@ -27,7 +27,7 @@ export class HomePageComponent extends AbstractPageComponent {
         this.actions = new ActionsRepository(app.storage);
         this.actions.load();
 
-        this.actionService = new ActionService(app);
+        this.actionExecuteCommandFactory = new ActionExecuteCommandFactory(app);
 
         this.registerProvidedComponent(
             'menu',

@@ -2,7 +2,7 @@ import { Abstract } from "../../../helpers/Abstract.js";
 import { AppException } from "../../../exceptions/AppException.js";
 import { Variable } from "../../../helpers/Variable.js";
 
-export class AbstractActionExecute extends Abstract {
+export class AbstractActionExecuteCommand extends Abstract {
     /**
      * Constructor.
      *
@@ -13,9 +13,10 @@ export class AbstractActionExecute extends Abstract {
 
         this._app = app;
 
-        if (new.target === AbstractActionExecute) {
+        if (new.target === AbstractActionExecuteCommand) {
             throw new AppException(
-                'Cannot construct AbstractActionExecute instances directly.'
+                'Cannot construct AbstractActionExecuteCommand '
+                +'instances directly.'
             );
         }
 

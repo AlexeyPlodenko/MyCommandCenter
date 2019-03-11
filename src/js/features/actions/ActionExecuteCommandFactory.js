@@ -1,19 +1,19 @@
 import { ActionModel } from "./ActionModel.js";
 import { AppException } from "../../exceptions/AppException.js";
-import { ExeActionExecute } from "./ActionExecute/ExeActionExecute.js";
 import { log } from "../../helpers/DevTools.js";
-import { Abstract } from "../../helpers/Abstract.js";
 import { UserException } from "../../exceptions/UserException.js";
+import { AbstractFactory } from "../../factories/AbstractFactory.js";
+import { ExeActionExecuteCommand } from "./ActionExecute/ExeActionExecuteCommand.js";
 
 const actionExecClasses = [
-    ExeActionExecute
+    ExeActionExecuteCommand
 ];
 
 /**
  * @class
  * @property {App} _app
  */
-export class ActionService extends Abstract {
+export class ActionExecuteCommandFactory extends AbstractFactory {
     /**
      * Constructor.
      *
@@ -23,6 +23,10 @@ export class ActionService extends Abstract {
         super();
 
         this._app = app;
+    }
+
+    makeActionExecuteCommand(action) {
+
     }
 
     /**

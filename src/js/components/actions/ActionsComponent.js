@@ -1,5 +1,4 @@
 import { AbstractVueComponent } from "../AbstractVueComponent.js";
-import { ActionService } from "../../features/actions/ActionService.js";
 import { AppException } from "../../exceptions/AppException.js";
 import { log } from "../../helpers/DevTools.js";
 
@@ -55,7 +54,7 @@ export class ActionsComponent extends AbstractVueComponent {
                 'Failed to find action with this ID in registry.'
             );
         }
-        this.getParentComponent().actionService.runAction(action);
+        this.getParentComponent().actionExecuteCommandFactory.runAction(action);
     }
 
     /**
