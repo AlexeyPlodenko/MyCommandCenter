@@ -54,7 +54,26 @@ export class ActionsComponent extends AbstractVueComponent {
                 'Failed to find action with this ID in registry.'
             );
         }
-        this.getParentComponent().actionExecuteCommandFactory.runAction(action);
+
+        const modalUi = this._app.ui.showNotificationModal(
+                            'Output',
+                            'Starting the app...'
+                        );
+
+        const actionExecCommand = this.getParentComponent()
+                                            .actionExecuteCommandFactory
+                                            .makeActionExecuteCommand(action);
+
+        const actionExecMsgHandler = (data) => {
+            const msg = data.toString('utf8').trim();
+            modalUi.data.text += "\n"+ msg;
+            // console.clear();
+            log('onStdOut', modalUi.data.text);
+        };
+        actionExecCommand.onStdOut(actionExecMsgHandler);
+        actionExecCommand.onStdErr(actionExecMsgHandler);
+
+        actionExecCommand.execute();
     }
 
     /**
