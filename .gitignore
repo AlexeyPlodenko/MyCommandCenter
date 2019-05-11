@@ -59,9 +59,9 @@ typings/
 
 # next.js build output
 .next
-
-/nbproject
 /build
 
-# VS Code IDE config.
+# IDE config.
 *.code-workspace
+/nbproject
+/.idea
