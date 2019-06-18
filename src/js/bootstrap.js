@@ -22,7 +22,7 @@ class ErrorsStorage {
     }
 
     /**
-     * @param {any} error
+     * @param {*} error
      */
     add(error) {
         error.date = new Date();
@@ -75,7 +75,7 @@ class ErrorsStorage {
 
 const errors = new ErrorsStorage();
 
-// handling exception from Node
+// handling exceptions from Node
 process.on('unhandledRejection', function (reason, promise) {
     handleNodeJsException('UnhandledRejection', reason, promise);
 });
@@ -135,7 +135,8 @@ Vue.config.errorHandler = function (err) {
                     // msg = error.msg;
                     stack = error.stack;
 
-                    delete error.stack, error.msg;
+                    delete error.stack;
+                    delete error.msg;
 
                     break;
             }
@@ -164,7 +165,7 @@ try {
 } catch (ex) {
     // handling errors from the App. itself
 
-    if (ex.isShowToUser !== 'undefined' && ex.isShowToUser()) {
+    if (ex.isShowToUser !== undefined && ex.isShowToUser()) {
         alert(ex.getMessage());
     } else {
         logError('AppException', ex);

@@ -9,10 +9,8 @@ import { Variable } from "../helpers/Variable.js";
 export class AbstractModel extends Abstract {
     /**
      * Constructor.
-     *
-     * @param {any} data
      */
-    constructor(data) {
+    constructor() {
         super();
 
         if (new.target === AbstractModel) {
@@ -67,7 +65,7 @@ export class AbstractModel extends Abstract {
 
             } else if (!throwExceptionOnUnknownKey) {
                 throw new AppException(
-                    'Property "'+ key +'" does not exist in this model. '+
+                    `Property "${key}" does not exist in this model. `+
                     'Either set the 2nd argument to TRUE or check data '+
                     'in 1st argument.'
                 );

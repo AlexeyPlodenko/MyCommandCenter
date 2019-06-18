@@ -93,6 +93,14 @@ export class MenuComponent extends AbstractVueComponent {
             <input type="hidden" name="type" value="FILE">
             <div class="form-group">
                 <div class="col">
+                    <label for="menu_add_name">Name</label>
+                    <input type="text" class="form-control-file" name="name" id="menu_add_name">
+                    <small class="form-text text-muted">Enter a name, otherwise the file name will be used automatically.</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col">
                     <label for="menu_add_${ActionTypes.FILE.uid}_file">Choose a file</label>
                     <input type="file" class="form-control-file" name="path" id="menu_add_${ActionTypes.FILE.uid}_file" required="required">
                     <small class="form-text text-muted">Choose any type of file. A proper application will run to handle it, if file is not of an executable type.</small>

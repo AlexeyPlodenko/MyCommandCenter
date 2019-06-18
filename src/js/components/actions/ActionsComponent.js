@@ -67,8 +67,8 @@ export class ActionsComponent extends AbstractVueComponent {
         const actionExecMsgHandler = (data) => {
             const msg = data.toString('utf8').trim();
             modalUi.data.text += "\n"+ msg;
-            // console.clear();
-            log('onStdOut', modalUi.data.text);
+// console.clear();
+log('onStdOut', modalUi.data.text);
         };
         actionExecCommand.onStdOut(actionExecMsgHandler);
         actionExecCommand.onStdErr(actionExecMsgHandler);

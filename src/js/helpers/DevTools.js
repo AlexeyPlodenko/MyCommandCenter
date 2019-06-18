@@ -25,6 +25,8 @@ export class DevTools {
      * Opens Chrome Dev. Tools.
      */
     showChromeDevTools() {
+        // blank dev. tools shown? Do npm install nw --nwjs_build_type=sdk
+        // https://github.com/nwjs/nw.js/issues/4383
 		NwGui.Window.get().showDevTools();
     }
 

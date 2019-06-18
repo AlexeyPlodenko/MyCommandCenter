@@ -1,7 +1,7 @@
 import { AppException } from '../exceptions/AppException.js';
+import {JsonFileReader} from "./JsonFileReader.js";
 
-const Fs = require('fs'),
-      Path = require('path');
+const pathJoin = require('path').join;
 
 /**
  * PackageJson.
@@ -18,6 +18,8 @@ export class PackageJson {
      */
     constructor(app) {
         this._loadPackageJson();
+
+        this._packageData = null;
     }
 
     /**
@@ -43,6 +45,7 @@ export class PackageJson {
      * @returns {Array|Object|String|Number}
      */
     _getByKey(keyName) {
+        this._loadPackageJson();
         return this._packageData[keyName];
     }
 
@@ -50,15 +53,16 @@ export class PackageJson {
      * Read /package.json file, parse it and keep for later usage.
      */
     _loadPackageJson() {
-        const baseDir = process.cwd();
-        const packagePath = Path.join(baseDir, '/package.json');
+        if (this._packageData === null) {
+            const baseDir = process.cwd();
+            const packagePath = pathJoin(baseDir, '/package.json');
 
-        if (!Fs.existsSync(packagePath)) {
-            throw new AppException('File /package.json does not exist.');
+            const reader = new JsonFileReader(packagePath);
+            if (!reader.fileExists()) {
+                throw new AppException('File /package.json does not exist.');
+            }
+
+            this._packageData = reader.readFile();
         }
-
-        const packageJson = Fs.readFileSync(packagePath, 'utf8');
-
-        this._packageData = JSON.parse(packageJson);
     }
 }

@@ -110,12 +110,12 @@ export class AbstractActionExecuteCommand extends Abstract {
 
         this._exe.on('disconnect', (code) => {
             this._exe = null;
-            console.log(`child process disconnectect with code ${code}`);
+console.log(`child process disconnectect with code ${code}`);
         });
 
         this._exe.on('close', (code) => {
             this._exe = null;
-            console.log(`child process exited with code ${code}`);
+console.log(`child process exited with code ${code}`);
         });
         // (err, stdout, stderr) => {
         //     log('exec', err, stdout, stderr);
