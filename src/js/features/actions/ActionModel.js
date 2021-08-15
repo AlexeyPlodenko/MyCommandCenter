@@ -13,7 +13,7 @@ export class ActionModel extends AbstractModel {
     /**
      * Constructor.
      *
-     * @param {any} data
+     * @param {*} data
      */
     constructor(data) {
         super(data);
@@ -31,7 +31,7 @@ export class ActionModel extends AbstractModel {
 
     /**
      *
-     * @param {any} data
+     * @param {*} data
      * @returns {boolean}
      */
     static isDataValid(data) {

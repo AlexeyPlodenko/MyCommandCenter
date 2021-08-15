@@ -4,7 +4,7 @@ import { Variable } from "../helpers/Variable.js";
 
 /**
  * @class
- * @property {any} _data
+ * @property {*} _data
  */
 export class AbstractModel extends Abstract {
     /**
@@ -46,7 +46,7 @@ export class AbstractModel extends Abstract {
     /**
      * Fill the model from the data in the 1st argument.
      *
-     * @param {any} data
+     * @param {*} data
      * @param {boolean} throwExceptionOnUnknownKey
      * @param {boolean} emptyValuesAllowed
      */
@@ -74,14 +74,14 @@ export class AbstractModel extends Abstract {
     }
 
     /**
-     * @returns {any}
+     * @returns {*}
      */
     getData() {
         return this._data;
     }
 
     /**
-     * @returns {any}
+     * @returns {*}
      */
     toJSON() {
         return this._data;
@@ -90,7 +90,7 @@ export class AbstractModel extends Abstract {
     /**
      * Create an instance of a model and pre-fill it.
      *
-     * @param {any} data
+     * @param {*} data
      */
     static fromJSON(data) {
         return AbstractModel.createFromData(data);
@@ -99,7 +99,7 @@ export class AbstractModel extends Abstract {
     /**
      * Create an instance of a model and pre-fill it.
      *
-     * @param {any} data
+     * @param {*} data
      */
     static createFromData(data) {
         const inst = new this();

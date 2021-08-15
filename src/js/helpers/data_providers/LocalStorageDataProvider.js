@@ -20,7 +20,7 @@ export class LocalStorageDataProvider extends AbstractDataProvider {
 
     /**
      * @param {string} key
-     * @param {any} value
+     * @param {*} value
      */
     set(key, value) {
         localStorage.setItem(key, value);

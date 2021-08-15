@@ -9,8 +9,8 @@ const VueRx = require('vue-rx');
  *
  * @class
  * @property {string} _storageKey A name of the key to use in localstorage.
- * @property {number} _maxErrors Max. ammount of errors to store. The rest
- *                              would be popped out.
+ * @property {number} _maxErrors Max. amount of errors to store. The rest
+ *                               would be popped out.
  */
 class ErrorsStorage {
     /**
@@ -48,8 +48,7 @@ class ErrorsStorage {
             try {
                 storedError = JSON.parse(storedErrorJson);
             } catch (ex) {
-                // JSON is corrupty. This should not happen.
-                // But we would be ready.
+                // JSON is corrupt. This should not happen. But we would be ready.
                 logError(
                     'Failed to parse JSON with stored errors. Clearing. '+
                     'Reload the app. to continue.'
@@ -121,7 +120,7 @@ Vue.config.errorHandler = function (err) {
     const errorList = errors.getAll();
     if (errorList.length > 0) {
         logError(
-            'Errors have occured during the last run. The app. was reloaded '+
+            'Errors have occurred during the last run. The app. was reloaded '+
             'to prevent any inconsistency or data corruption. '+
             'Check the list below.'
         );

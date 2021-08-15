@@ -7,7 +7,7 @@ export class Variable extends Abstract {
      * Check if the parameter is an empty variable.
      * @author https://www.npmjs.com/package/is-empty
      *
-     * @param {any} data
+     * @param {*} data
      */
     static isEmpty(data) {
         return isEmpty(data);
@@ -16,7 +16,7 @@ export class Variable extends Abstract {
     /**
      * Check that variable is an array.
      *
-     * @param {any} data
+     * @param {*} data
      */
     static isArray(data) {
         return Array.isArray(data);
@@ -25,7 +25,7 @@ export class Variable extends Abstract {
     /**
      * Check if the key exists in data set.
      *
-     * @param {any} data
+     * @param {*} data
      * @param {string} key
      */
     static hasKey(data, key) {
@@ -35,7 +35,7 @@ export class Variable extends Abstract {
     /**
      * Check if data is of a scalar type.
      *
-     * @param {any} data
+     * @param {*} data
      */
     static isScalar(data) {
         const dataType = typeof data;
@@ -50,7 +50,7 @@ export class Variable extends Abstract {
     /**
      * Checks the data type.
      *
-     * @param {any} data
+     * @param {*} data
      * @param {string} type
      */
     static isOfType(data, type) {

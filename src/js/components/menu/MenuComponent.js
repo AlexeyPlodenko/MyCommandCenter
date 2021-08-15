@@ -33,7 +33,7 @@ export class MenuComponent extends AbstractVueComponent {
         for (const key in ActionTypes) {
             const actionType = ActionTypes[key];
             this.items.set('menu_add_'+ actionType.uid, actionType.ui);
-        };
+        }
 
         this.items.set('menu_add_category', {
             open: false,
@@ -62,7 +62,7 @@ export class MenuComponent extends AbstractVueComponent {
                 <li class="breadcrumb-item" aria-current="page">Menu</li>
             </ol>
         </nav>
-        <ul class="menu_lvl_1 nav flex-column flex-grow-1">
+        <!--<ul class="menu_lvl_1 nav flex-column flex-grow-1">
             <li class="menu_item nav-item">
                 <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add</a>
                 <div class="dropdown-menu" id="menu_add">
@@ -79,10 +79,10 @@ export class MenuComponent extends AbstractVueComponent {
             <li class="menu_item nav-item small">
                 <a href="" class="nav-link">Close</a>
             </li>
-        </ul>
+        </ul>-->
     </div>
 
-    <div id="menu_add_${ActionTypes.FILE.uid}">
+    <!--<div id="menu_add_${ActionTypes.FILE.uid}">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb small">
                 <li class="breadcrumb-item"><a href="" data-show-menu-item="menu_home">Menu</a></li>
@@ -142,7 +142,7 @@ export class MenuComponent extends AbstractVueComponent {
                 <div class="col">
                     <label>Command</label>
                     <div class="input-group dynamic_field">
-                        <textarea class="form-control" name="arguments[]" type="text" rows="10"></textarea>
+                        <textarea class="form-control" name="arguments[]" rows="10"></textarea>
                     </div>
                 </div>
             </div>
@@ -171,7 +171,7 @@ export class MenuComponent extends AbstractVueComponent {
                 <li class="breadcrumb-item active" aria-current="page">Add category</li>
             </ol>
         </nav>
-    </div>
+    </div>-->
 </div>
             `
         );
@@ -264,7 +264,7 @@ export class MenuComponent extends AbstractVueComponent {
 
         const action = ActionModel.createFromData(data);
 
-        /** @type {HomePageComponent} */
+        /** @type {HomePageComponent|AbstractPageComponent} */
         const homePage = this._app.ui.getCurrentPageComponent();
         homePage.actions.addActionModel(action);
 

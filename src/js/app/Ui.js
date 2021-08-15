@@ -67,7 +67,7 @@ export class Ui extends Abstract {
      * Render template and insert into HTML body tag.
      *
      * @param {string} tmplName
-     * @param {any} data
+     * @param {*} data
      */
     renderTemplate(tmplName, data) {
         const tmpl = this._getTemplateInstance(tmplName);
@@ -175,7 +175,7 @@ export class Ui extends Abstract {
 
     /**
      * @param {string} tmplName
-     * @returns {any}
+     * @returns {*}
      */
     _getTemplateInstance(tmplName) {
         if (this._tpls === undefined) {
@@ -195,7 +195,7 @@ export class Ui extends Abstract {
     /**
      * Expand selector to jQuery instance from the string or jQuery instance.
      *
-     * @param {string|JQuery} selector
+     * @param {(string|JQuery)} selector
      * @returns {JQuery}
      */
     _expandSelectorToJquery(selector) {

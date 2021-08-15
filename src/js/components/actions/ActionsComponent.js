@@ -23,7 +23,7 @@ export class ActionsComponent extends AbstractVueComponent {
                 </div>
 
                 <div class="card">
-                    <h5 class="card-header small">Featured</h5>
+                    <h5 class="card-header small">Global</h5>
                     <div class="card-body">
                         <template v-for="(action, ix) in actions$">
                             <div class="card action" style="width: 8rem;" @click.stop="runAction(ix);">

@@ -20,7 +20,7 @@ export class Store {
      * Update an item in state.
      *
      * @param {string} itemName
-     * @param {any} itemValue
+     * @param {*} itemValue
      */
     setStateItem(itemName, itemValue) {
         const state = this._state$.getValue();

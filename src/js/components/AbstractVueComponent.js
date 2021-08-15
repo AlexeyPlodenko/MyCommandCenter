@@ -42,7 +42,7 @@ export class AbstractVueComponent extends AbstractComponent {
 
     /**
      * @param {string} name
-     * @param {any} value
+     * @param {*} value
      */
     setVueParam(name, value) {
         this._vueParams[name] = value;
@@ -50,8 +50,8 @@ export class AbstractVueComponent extends AbstractComponent {
 
     /**
      * @param {string} name
-     * @param {any} valueIfNotExists
-     * @returns {any}
+     * @param {*} valueIfNotExists
+     * @returns {*}
      */
     getVueParam(name, valueIfNotExists) {
         return this._vueParams.hasOwnProperty(name)
