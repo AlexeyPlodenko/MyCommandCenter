@@ -1,24 +1,15 @@
-import { log, DevTools } from "../helpers/DevTools.js";
-import { Ui } from "./Ui.js";
-import { Router } from "./Router.js";
-import { PackageJson } from "../helpers/PackageJson.js";
-import { ClientNwjs } from "../helpers/client/ClientNwjs.js";
-import { LocalStorageDataProvider } from "../helpers/data_providers/LocalStorageDataProvider.js";
-import { PageComponentFactory } from "../factories/PageComponentFactory.js";
+import { log } from "../helpers/DevTools.js";
+import { makeUi } from '../providers/UiProvider.js';
+import { makeDevTools } from '../providers/DevToolsProvider.js';
 
-const Fs = require('fs'),
-      Path = require('path'),
-      NwGui = require('nw.gui');
+const Fs = require('fs');
+const Path = require('path');
+const NwGui = require('nw.gui');
 
 /**
  * Application.
  *
  * @class
- * @property {DevTools} devTools
- * @property {Ui} ui
- * @property {Router} router
- * @property {PackageJson} packageJson
- * @property {pageComponentFactory} pageComponentFactory
  * @property {string} _env
  * @property {boolean} _envIsDev
  */
@@ -31,24 +22,16 @@ export class App {
 
         this._loadEnv();
 
-        this.packageJson = new PackageJson(this);
-
         if (this.isDevEnv()) {
-            this.devTools = new DevTools(this);
+            this.devTools = makeDevTools();
             this.devTools.showChromeDevTools();
             this.devTools.startFileWatcher();
         }
 
-        this.client = new ClientNwjs();
-        this.ui = new Ui(this);
-        this.router = new Router(this);
-        this.pageComponentFactory = new PageComponentFactory(this);
-        this.storage = new LocalStorageDataProvider();
-
         $(() => {
             // init. the app's UI as soon as DOM is ready
 
-            this.ui.init();
+            makeUi().init();
         });
     }
 
@@ -73,6 +56,7 @@ export class App {
     /**
      * Clear HTML cached in Chrome, so the app. would always show
      * the latest version.
+     * @protected
      */
     _clearHtmlCache() {
         NwGui.App.clearCache();
@@ -80,9 +64,11 @@ export class App {
             delete global.require.cache[module];
         }
     }
+
     /**
      * Read /.env file and set env. of the app. to it, otherwise
      * use "production" be default.
+     * @protected
      */
     _loadEnv() {
         const baseDir = process.cwd();
@@ -96,7 +82,7 @@ export class App {
 
         this._envIsDev = (this._env === 'development');
 
-        log('Current environment based on .env file - ', this._env);
+        log('Current environment based on the .env file -', this._env);
     }
 }
 

@@ -11,11 +11,9 @@ import { AppException } from "../../exceptions/AppException.js";
 export class AbstractPageComponent extends AbstractComponent {
     /**
      * Constructor.
-     *
-     * @param {App} app
      */
-    constructor(app) {
-        super(app);
+    constructor() {
+        super();
 
         if (new.target === AbstractPageComponent) {
             throw new AppException(
@@ -33,7 +31,7 @@ export class AbstractPageComponent extends AbstractComponent {
      * @param {function} component
      */
     registerProvidedComponent(name, component) {
-        const componentInstance = new component(this._app);
+        const componentInstance = new component();
         componentInstance.setParentComponent(this);
 
         this._providedComponents[name] = componentInstance;

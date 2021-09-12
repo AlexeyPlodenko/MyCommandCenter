@@ -53,7 +53,7 @@ export class SearchComponent extends AbstractComponent {
     }
 
     /**
-     * _setUiFocus
+     * @protected
      */
     _setUiFocus() {
         this.$searchInput.focus();
@@ -66,7 +66,7 @@ export class SearchComponent extends AbstractComponent {
     }
 
     /**
-     * _removeUiFocus.
+     * @protected
      */
     _removeUiFocus() {
         this.$searchInput.off('blur');

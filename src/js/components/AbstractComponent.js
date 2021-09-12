@@ -9,7 +9,6 @@ import { AppException } from "../exceptions/AppException.js";
  *
  * @class
  * @abstract init
- * @property {App} _app
  * @property {boolean} reusable If true, the component would not be removed
  *                              from memory once user will leave the page.
  *                              On come back the same component will be used.
@@ -18,10 +17,8 @@ import { AppException } from "../exceptions/AppException.js";
 export class AbstractComponent extends Abstract {
     /**
      * Constructor.
-     *
-     * @param {App} app
      */
-    constructor(app) {
+    constructor() {
         super();
 
         if (new.target === AbstractComponent) {
@@ -34,7 +31,6 @@ export class AbstractComponent extends Abstract {
             throw new AppException('Class must implement the method "init".');
         }
 
-        this._app = app;
         this.reusable = false;
         this.state = new Store();
         this._parentComponent = null;

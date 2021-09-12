@@ -1,9 +1,9 @@
-import { AbstractDataProvider } from "./AbstractDataProvider.js";
+import { AbstractDataStorage } from "./AbstractDataStorage.js";
 
 /**
- * LocalStorageDataProvider.
+ * LocalStorageDataStorage.
  */
-export class LocalStorageDataProvider extends AbstractDataProvider {
+export class LocalStorageDataStorage extends AbstractDataStorage {
     /**
      * Constructor.
      */

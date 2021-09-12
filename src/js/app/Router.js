@@ -1,3 +1,5 @@
+import { makePackageJson } from '../providers/PackageJsonProvider.js';
+
 /**
  * Responsible for routing URL to components.
  *
@@ -5,15 +7,6 @@
  * @property {App} _app
  */
 export class Router {
-    /**
-     * Constructor
-     *
-     * @param {App} app
-     */
-    constructor(app) {
-        this._app = app;
-    }
-
     /**
      * Get route based on the path.
      *
@@ -33,7 +26,7 @@ export class Router {
         // remove slash duplicates, just in case
         urlPath = urlPath.replace(/\/+$/, '/');
 
-        const routes = this._app.packageJson.getRoutes();
+        const routes = makePackageJson().getRoutes();
 
         let route;
         if (routes.hasOwnProperty(urlPath)) {

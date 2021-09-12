@@ -9,7 +9,7 @@ export class ActionsRepository extends AbstractRepository {
     /**
      * Constructor.
      *
-     * @param {AbstractDataProvider} storage
+     * @param {AbstractDataStorage} storage
      */
     constructor(storage) {
         super(storage);
@@ -30,6 +30,7 @@ export class ActionsRepository extends AbstractRepository {
 
     /**
      * @returns {function}
+     * @protected
      */
     _getModel() {
         return ActionModel;

@@ -1,6 +1,8 @@
-const Fs = require('fs'),
-      NwGui = require('nw.gui'),
-      Path = require('path');
+import { makePackageJson } from '../providers/PackageJsonProvider.js';
+
+const Fs = require('fs');
+const NwGui = require('nw.gui');
+const Path = require('path');
 
 /**
  * DevTools.
@@ -12,15 +14,6 @@ const Fs = require('fs'),
  * @property {Array} _reloadWatchers
  */
 export class DevTools {
-    /**
-     * Constructor.
-     *
-     * @param {App} app
-     */
-    constructor(app) {
-        this._app = app;
-    }
-
     /**
      * Opens Chrome Dev. Tools.
      */
@@ -38,7 +31,7 @@ export class DevTools {
 
         this._reloadWatchers = [];
 
-        const watchPaths = this._app.packageJson.getDevRoutesWatch();
+        const watchPaths = makePackageJson().getDevRoutesWatch();
         for (let i = watchPaths.length - 1; i >= 0; i--) {
             const path = Path.join(baseDir, watchPaths[i]);
 

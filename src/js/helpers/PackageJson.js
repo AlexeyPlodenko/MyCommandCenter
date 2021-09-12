@@ -13,10 +13,8 @@ const pathJoin = require('path').join;
 export class PackageJson {
     /**
      * Constructor.
-     *
-     * @param {App} app
      */
-    constructor(app) {
+    constructor() {
         this._loadPackageJson();
 
         this._packageData = null;

@@ -1,1 +1,1 @@
-cd ../../ & npm run app
+cd ../../ & npm start

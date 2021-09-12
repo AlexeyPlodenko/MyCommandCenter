@@ -21,17 +21,6 @@ const actionExecClasses = [
  */
 export class ActionExecuteCommandFactory extends AbstractFactory {
     /**
-     * Constructor.
-     *
-     * @param {App} app
-     */
-    constructor(app) {
-        super();
-
-        this._app = app;
-    }
-
-    /**
      * @param {ActionModel} action
      * @returns {AbstractActionExecuteCommand}
      */
@@ -42,7 +31,7 @@ export class ActionExecuteCommandFactory extends AbstractFactory {
 
         const ext = action.path.split('.').pop().toLowerCase();
         const actionExecCommand = this._getExtExecutor(ext);
-        return new actionExecCommand(this._app, action);
+        return new actionExecCommand(action);
     }
 
     // /**

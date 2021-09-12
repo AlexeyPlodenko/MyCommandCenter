@@ -1,6 +1,7 @@
 import { AbstractVueComponent } from "../AbstractVueComponent.js";
 import { AppException } from "../../exceptions/AppException.js";
 import { log } from "../../helpers/DevTools.js";
+import { makeUi } from '../../providers/UiProvider.js';
 
 /**
  * Actions.
@@ -8,7 +9,7 @@ import { log } from "../../helpers/DevTools.js";
  * @class
  * @property {ActionsRepository} _actions
  */
-export class ActionsComponent extends AbstractVueComponent {
+export class ApplicationsComponent extends AbstractVueComponent {
     /**
      *
      */
@@ -26,10 +27,9 @@ export class ActionsComponent extends AbstractVueComponent {
                     <h5 class="card-header small">Global</h5>
                     <div class="card-body">
                         <template v-for="(action, ix) in actions$">
-                            <div class="card action" style="width: 8rem;" @click.stop="runAction(ix);">
-                                <span class="clickable close-icon action_close_icon" data-effect="fadeOut" @click.stop="removeAction(ix);"><i class="fa fa-times-circle"></i></span>
-                                <img class="card-img-top" src="https://scontent.fmla1-1.fna.fbcdn.net/v/t31.0-8/322310_240368599342071_2554949_o.jpg?_nc_cat=109&_nc_ht=scontent.fmla1-1.fna&oh=66302d3c034dd1cfc7e4e42afbe1a3e6&oe=5CE4D2C2">
-                                <div class="card-body small p-1 action_name">{{ action.getName() }}</div>
+                            <div class="action" style="width: 8rem;" @click.stop="runApplication(ix);">
+                                <span class="clickable close-icon action_close_icon" data-effect="fadeOut" @click.stop="removeApplication(ix);"><i class="fa fa-times-circle"></i></span>
+                                <div class="small p-1 action_name">{{ action.getName() }}</div>
                             </div>
                         </template>
                     </div>
@@ -47,7 +47,7 @@ export class ActionsComponent extends AbstractVueComponent {
     /**
      * @param {number} actionId
      */
-    runAction(actionId) {
+    runApplication(actionId) {
         const action = this._actions.get(actionId);
         if (action === undefined) {
             throw new AppException(
@@ -55,7 +55,7 @@ export class ActionsComponent extends AbstractVueComponent {
             );
         }
 
-        const modalUi = this._app.ui.showNotificationModal(
+        const modalUi = makeUi().showNotificationModal(
                             'Output',
                             'Starting the app...'
                         );
@@ -79,7 +79,7 @@ log('onStdOut', modalUi.data.text);
     /**
      * @param {number} actionId
      */
-    removeAction(actionId) {
+    removeApplication(actionId) {
         const action = this._actions.get(actionId);
         if (action === undefined) {
             throw new AppException(
@@ -87,7 +87,7 @@ log('onStdOut', modalUi.data.text);
             );
         }
 
-        const modal = this._app.ui.showConfirmationModal(
+        const modal = makeUi().showConfirmationModal(
             'Confirmation',
             'Are you sure you want to remove this action?'
         );

@@ -1,5 +1,5 @@
 import { Abstract } from "../helpers/Abstract.js";
-import { AbstractDataProvider } from "../helpers/data_providers/AbstractDataProvider.js";
+import { AbstractDataStorage } from "../helpers/dataStorages/AbstractDataStorage.js";
 import { AbstractModel } from "../models/AbstractModel.js";
 import { logError, log } from "../helpers/DevTools.js";
 import { ActionModel } from "../features/actions/ActionModel.js";
@@ -12,7 +12,7 @@ const BehaviorSubject = require('rxjs/BehaviorSubject').BehaviorSubject;
  * AbstractRepository.
  *
  * @class
- * @property {AbstractDataProvider} _storage
+ * @property {AbstractDataStorage} _storage
  * @property {AbstractModel[]} _models
  * @property {BehaviorSubject} models$
  */
@@ -20,7 +20,7 @@ export class AbstractRepository extends Abstract {
     /**
      * Constructor.
      *
-     * @param {AbstractDataProvider} storage
+     * @param {AbstractDataStorage} storage
      */
     constructor(storage) {
         super();

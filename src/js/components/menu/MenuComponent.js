@@ -5,6 +5,8 @@ import { DynamicInputComponent } from "../dynamic_input/DynamicInputComponent.js
 import { FormHelper } from "../../helpers/ui/FormHelper.js";
 import { ActionTypes } from "../../features/actions/ActionTypes.js";
 import { Variable } from "../../helpers/Variable.js";
+import { makeApplicationArgumentsRepository } from '../../providers/ApplicationArgumentsRepositoryProvider.js';
+import { makeUi } from '../../providers/UiProvider.js';
 
 /**
  * Actions.
@@ -62,8 +64,12 @@ export class MenuComponent extends AbstractVueComponent {
                 <li class="breadcrumb-item" aria-current="page">Menu</li>
             </ol>
         </nav>
-        <!--<ul class="menu_lvl_1 nav flex-column flex-grow-1">
+
+        <ul class="menu_lvl_1 nav flex-column flex-grow-1">
             <li class="menu_item nav-item">
+                <a href="" class="nav-link" id="menu_add_cli_app">Add CLI application</a>
+            </li>
+            <!--<li class="menu_item nav-item">
                 <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add</a>
                 <div class="dropdown-menu" id="menu_add">
                     <a class="dropdown-item" href="" data-show-menu-item="menu_add_${ActionTypes.FILE.uid}" data-toggle="tooltip" data-placement="left" title="Any type of file. A proper application will run to handle it.">File</a>
@@ -72,17 +78,17 @@ export class MenuComponent extends AbstractVueComponent {
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="" data-show-menu-item="menu_add_category">Category</a>
                 </div>
-            </li>
+            </li>-->
             <li class="menu_item nav-item small mt-auto">
                 <a href="" class="nav-link">Preferences</a>
             </li>
             <li class="menu_item nav-item small">
                 <a href="" class="nav-link">Close</a>
             </li>
-        </ul>-->
+        </ul>
     </div>
 
-    <!--<div id="menu_add_${ActionTypes.FILE.uid}">
+    <div id="menu_add_${ActionTypes.FILE.uid}">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb small">
                 <li class="breadcrumb-item"><a href="" data-show-menu-item="menu_home">Menu</a></li>
@@ -171,7 +177,7 @@ export class MenuComponent extends AbstractVueComponent {
                 <li class="breadcrumb-item active" aria-current="page">Add category</li>
             </ol>
         </nav>
-    </div>-->
+    </div>
 </div>
             `
         );
@@ -186,11 +192,35 @@ export class MenuComponent extends AbstractVueComponent {
      * Initialization to run after Vue element is mounted.
      */
     afterMount() {
+        $('#menu_add_cli_app').click(async (ev) => {
+            ev.preventDefault();
+
+            const appArgsRepo = makeApplicationArgumentsRepository();
+
+            const addFormHtml = ['<input id="notification_add_cli_app" list="notification_add_cli_app_list" class="w100" /><datalist id="notification_add_cli_app_list">'];
+
+            const appNames = await appArgsRepo.getAppNames$();
+            for (const appName of appNames) {
+                addFormHtml.push(`<option value="${appName}">`);
+            }
+
+            addFormHtml.push('</datalist>');
+
+            const addForm = makeUi().getNotificationModal();
+            addForm.setHtml(addFormHtml.join(''));
+            addForm.setTitle('Add CLI application');
+            addForm.setAccept('Add');
+            addForm.setCancel('Cancel');
+            addForm.show(null, () => {
+                $('#notification_add_cli_app').focus();
+            });
+        });
+
         const $menu = $('#menu');
 
         $menu.find('a[data-show-menu-item]').click((ev) => {
             // ugly hack, closing bootstrap's drop-down @TODO implement properly
-            this._app.ui.$body.trigger('click');
+            makeUi().$body.trigger('click');
 
             const itemIdClicked = $(ev.target).attr('data-show-menu-item');
             this.openMenuItem(itemIdClicked);
@@ -226,7 +256,7 @@ export class MenuComponent extends AbstractVueComponent {
 
         for (const [itemId, item] of this.items) {
             if (!item.open) {
-                this._app.ui.hide('#'+ itemId);
+                makeUi().hide('#'+ itemId);
             } else {
                 if (this.openItemId !== '') {
                     throw new AppException(
@@ -244,9 +274,37 @@ export class MenuComponent extends AbstractVueComponent {
     }
 
     /**
+     * openMenuItem.
+     *
+     * @param {String} itemId
+     */
+    openMenuItem(itemId) {
+        makeUi().hide('#'+ this.openItemId);
+        makeUi().show('#'+ itemId);
+
+        this.openItemId = itemId;
+
+        const currentPageComponent = makeUi().getCurrentPageComponent();
+        /** @var {SearchComponent} searchComp */
+        const searchComp = currentPageComponent.getComponent('search');
+        const menuItem = this.items.get(itemId);
+        if (menuItem.needsFocus) {
+            searchComp.unlockFocus();
+
+            if (menuItem.focusOnOpen !== false) {
+                $(menuItem.focusOnOpen).focus();
+            }
+
+        } else {
+            searchComp.lockFocus();
+        }
+    }
+
+    /**
      *
      * @param {object} ev
      * @param {function} prepareDataBeforeCreateFn
+     * @protected
      */
     _createAction(ev, prepareDataBeforeCreateFn) {
         const $this = $(ev.target);
@@ -265,36 +323,9 @@ export class MenuComponent extends AbstractVueComponent {
         const action = ActionModel.createFromData(data);
 
         /** @type {HomePageComponent|AbstractPageComponent} */
-        const homePage = this._app.ui.getCurrentPageComponent();
+        const homePage = makeUi().getCurrentPageComponent();
         homePage.actions.addActionModel(action);
 
         return false;
-    }
-
-    /**
-     * openMenuItem.
-     *
-     * @param {String} itemId
-     */
-    openMenuItem(itemId) {
-        this._app.ui.hide('#'+ this.openItemId);
-        this._app.ui.show('#'+ itemId);
-
-        this.openItemId = itemId;
-
-        const menuItem = this.items.get(itemId);
-
-        const currentPageComponent = this._app.ui.getCurrentPageComponent();
-        const searchComp = currentPageComponent.getComponent('search');
-        if (menuItem.needsFocus) {
-            searchComp.unlockFocus();
-
-            if (menuItem.focusOnOpen !== false) {
-                $(menuItem.focusOnOpen).focus();
-            }
-
-        } else {
-            searchComp.lockFocus();
-        }
     }
 }

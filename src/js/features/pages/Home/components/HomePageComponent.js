@@ -1,11 +1,10 @@
 import { ActionsRepository } from "../../../actions/ActionsRepository.js";
 import { AbstractPageComponent } from "../../AbstractPageComponent.js";
-import { App } from "../../../../app/App.js";
 import { SearchComponent } from "../../../../components/search/SearchComponent.js";
-import { log } from "../../../../helpers/DevTools.js";
-import { ActionsComponent } from "../../../../components/actions/ActionsComponent.js";
-import { MenuComponent } from "../../../../components/menu/MenuComponent.js";
 import { ActionExecuteCommandFactory } from "../../../actions/ActionExecuteCommandFactory.js";
+import { MenuComponent } from '../../../../components/menu/MenuComponent.js';
+import { ApplicationsComponent } from '../../../../components/actions/ApplicationsComponent.js';
+import { makeLocalStorageDataStorage } from '../../../../providers/LocalStorageDataStorageProvider.js';
 
 /**
  * HomePageComponent.
@@ -18,28 +17,27 @@ import { ActionExecuteCommandFactory } from "../../../actions/ActionExecuteComma
 export class HomePageComponent extends AbstractPageComponent {
     /**
      * Constructor.
-     *
-     * @param {App} app
      */
-    constructor(app) {
-        super(app);
+    constructor() {
+        super();
 
-        this.actions = new ActionsRepository(app.storage);
+        const storage = makeLocalStorageDataStorage();
+        this.actions = new ActionsRepository(storage);
         this.actions.load();
 
-        this.actionExecuteCommandFactory = new ActionExecuteCommandFactory(app);
+        this.actionExecuteCommandFactory = new ActionExecuteCommandFactory();
 
-        this.registerProvidedComponent(
-            'menu',
-            MenuComponent
-        );
         this.registerProvidedComponent(
             'search',
             SearchComponent
         );
         this.registerProvidedComponent(
-            'actions',
-            ActionsComponent
+            'menu',
+            MenuComponent
+        );
+        this.registerProvidedComponent(
+            'applications',
+            ApplicationsComponent
         );
     }
 

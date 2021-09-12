@@ -1,9 +1,12 @@
 import { Abstract } from '../helpers/Abstract.js';
-import { App } from './App.js';
 import { AbstractPageComponent } from '../features/pages/AbstractPageComponent.js';
 import { ModalComponent } from '../components/modal/ModalComponent.js';
 import { log } from '../helpers/DevTools.js';
 import { AppException } from '../exceptions/AppException.js';
+import { makeClientNwjs } from '../providers/ClientNwjsProvider.js';
+import { makeRouter } from '../providers/RouterProvider.js';
+import { makePageComponentFactory } from '../providers/PageComponentFactoryProvider.js';
+import { makeUi } from '../providers/UiProvider.js';
 
 const JsRender = require('jsrender/jsrender-node');
 
@@ -11,7 +14,6 @@ const JsRender = require('jsrender/jsrender-node');
  * UI.
  *
  * @class
- * @property {App} _app
  * @property {JQuery} $body
  * @property {JQuery} $page
  * @property {AbstractPageComponent} _currentPageComponent
@@ -20,13 +22,10 @@ const JsRender = require('jsrender/jsrender-node');
 export class Ui extends Abstract {
     /**
      * Constructor.
-     *
-     * @param {App} app
      */
-    constructor(app) {
+    constructor() {
         super();
 
-        this._app = app;
         this.$body = $('body');
         this.$page = $('#page');
     }
@@ -89,14 +88,14 @@ export class Ui extends Abstract {
      * Init. logic affecting UI or working with DOM.
      */
     init() {
-        this._app.client.path$.subscribe((path) => {
+        makeClientNwjs().path$.subscribe((path) => {
             // create component based on the updated path
 
-            const urlPath = this._app.client.getPath();
-            const route = this._app.router.getRouteByPath(urlPath);
+            const urlPath = makeClientNwjs().getPath();
+            const route = makeRouter().getRouteByPath(urlPath);
 
             /* @type {AbstractPageComponent} */
-            this._currentPageComponent = this._app.pageComponentFactory
+            this._currentPageComponent = makePageComponentFactory()
                                                             .createComponent(
                                                                 route.component
                                                             );
@@ -104,8 +103,8 @@ export class Ui extends Abstract {
             // this._currentPageComponent.store.state$.subscribe((state) => {
                 // once component is ready, render the template
 
-                // this._app.ui.renderTemplate(route.template, state);
-                this._app.ui.renderTemplate(route.template, {});
+                // makeUi().renderTemplate(route.template, state);
+                makeUi().renderTemplate(route.template, {});
 
                 setTimeout(() => {
                     // wait for the template to render in DOM and then run
@@ -128,6 +127,8 @@ export class Ui extends Abstract {
     }
 
     /**
+     * @param {string} title
+     * @param {string} text
      * @returns {ModalComponent}
      */
     showConfirmationModal(title, text) {
@@ -141,6 +142,8 @@ export class Ui extends Abstract {
     }
 
     /**
+     * @param {string} title
+     * @param {string} text
      * @returns {ModalComponent}
      */
     showNotificationModal(title, text) {
@@ -156,9 +159,17 @@ export class Ui extends Abstract {
     /**
      * @returns {ModalComponent}
      */
+    getNotificationModal() {
+        return this._getModalComponent();
+    }
+
+    /**
+     * @returns {ModalComponent}
+     * @protected
+     */
     _getModalComponent() {
         if (this._modalComponent === undefined) {
-            this._modalComponent = new ModalComponent(this._app, 'mainModal');
+            this._modalComponent = new ModalComponent('mainModal');
             this._modalComponent.init();
         }
 
@@ -168,6 +179,7 @@ export class Ui extends Abstract {
     /**
      * @param {string} tmplName
      * @returns {string}
+     * @protected
      */
     _getComponentNodeId(tmplName) {
         return tmplName +'PageComponent';
@@ -176,6 +188,7 @@ export class Ui extends Abstract {
     /**
      * @param {string} tmplName
      * @returns {*}
+     * @protected
      */
     _getTemplateInstance(tmplName) {
         if (this._tpls === undefined) {
@@ -183,9 +196,7 @@ export class Ui extends Abstract {
         }
 
         if (!this._tpls.hasOwnProperty(tmplName)) {
-            const tmplPath = './src/js/features/pages/'+ tmplName +
-                             '/templates/'+ tmplName +'.html';
-
+            const tmplPath = `./src/js/features/pages/${tmplName}/templates/${tmplName}.html`;
             this._tpls[tmplName] = JsRender.templates(tmplPath);
         }
 
@@ -195,8 +206,9 @@ export class Ui extends Abstract {
     /**
      * Expand selector to jQuery instance from the string or jQuery instance.
      *
-     * @param {(string|JQuery)} selector
-     * @returns {JQuery}
+     * @param {(string|jQuery)} selector
+     * @returns {jQuery}
+     * @protected
      */
     _expandSelectorToJquery(selector) {
         let $selector;

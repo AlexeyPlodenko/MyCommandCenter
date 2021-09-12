@@ -7,16 +7,16 @@ import { AppException } from "../../exceptions/AppException.js";
  * @abstract set
  * @abstract remove
  */
-export class AbstractDataProvider extends Abstract {
+export class AbstractDataStorage extends Abstract {
     /**
      * Constructor.
      */
     constructor() {
         super();
 
-        if (new.target === AbstractDataProvider) {
+        if (new.target === AbstractDataStorage) {
             throw new AppException(
-                'Cannot construct AbstractDataProvider instances directly.'
+                'Cannot construct AbstractDataStorage instances directly.'
             );
         }
 

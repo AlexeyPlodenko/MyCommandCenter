@@ -3,6 +3,17 @@ import { logError, log } from "./helpers/DevTools.js";
 
 const VueRx = require('vue-rx');
 
+// const optionDefinitions = [
+//     { name: 'verbose', alias: 'v', type: Boolean },
+//     { name: 'src', type: String, multiple: true, defaultOption: true },
+//     { name: 'timeout', alias: 't', type: Number },
+// ];
+// const commandLineArgs = require('command-line-args');
+// const options = commandLineArgs(optionDefinitions, {
+//     argv: ['-v', '--timeout=1000', '/asda/asdas/dasd/asd/', '/345435/34534/5345/']
+// });
+// console.log(options);
+
 /**
  * A bootstrap's error handling class.
  * Lets keep it here so errors may be caught early.

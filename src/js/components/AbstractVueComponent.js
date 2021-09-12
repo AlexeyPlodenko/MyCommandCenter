@@ -19,11 +19,9 @@ import { AppException } from "../exceptions/AppException.js";
 export class AbstractVueComponent extends AbstractComponent {
     /**
      * Constructor.
-     *
-     * @param {App} app
      */
-    constructor(app) {
-        super(app);
+    constructor() {
+        super();
 
         if (new.target === AbstractComponent) {
             throw new AppException(
@@ -83,8 +81,10 @@ export class AbstractVueComponent extends AbstractComponent {
         const objProto = Object.getPrototypeOf(this);
         Object.getOwnPropertyNames(objProto)
                     .forEach(name => {
-                        if (excludeMethods.indexOf(name) === -1
-                            && typeof this[name] === 'function') {
+                        if (
+                               excludeMethods.indexOf(name) === -1
+                            && typeof this[name] === 'function'
+                        ) {
                             vueMethods[name] = this[name].bind(this);
                         }
                     });

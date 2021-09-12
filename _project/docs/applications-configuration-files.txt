@@ -1,0 +1,21 @@
+The CLI applications configuration files are stored in /src/applications/. Each application configuration is stored in its directory. Each directory contains a bunch of JSON files, which define one or multiple application starting commands.
+
+ An example of a configuration file:
+ {
+   "name": "git clone",
+   "parameters": [
+     {"name": "template", "type": "string"},
+     {"name": "local", "alias":  "l", "type": "boolean"},
+     {"name": "shallow-submodules", "alias":  "no-shallow-submodules", "type": "boolean"},
+     {"name": "space", "noName":  true, "value": ["--"]},
+     {"name": "repository", "required":  true, "noName":  true}
+   ]
+ }
+
+Possible parameters:
+    name - A string, defining the name of this parameter.
+    type - A string, defining type of the parameter. It can be: string, boolean, number, file.
+    alias - A string or an array of string, listing possible name aliases for this parameter.
+    required - A boolean, defining if this parameter must be listed. By default - false.
+    value - An array of strings, listing possible values to be in the parameter.
+    noName - A boolean, defining that the parameter does not have a name and only a value.
